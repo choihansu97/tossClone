@@ -59,6 +59,10 @@ export class CreateRouter {
             }
         });
 
+        window.addEventListener('popstate', () => {
+            this.checkRoute();
+        });
+
         this.checkRoute();
     }
 }
