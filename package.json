@@ -1,0 +1,23 @@
+{
+  "name": "tossclone",
+  "version": "1.0.0",
+  "description": "f-lab",
+  "main": "src/static/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://myusername: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@github.com/choihansu97/tossClone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/choihansu97/tossClone/issues"
+  },
+  "homepage": "https://github.com/choihansu97/tossClone#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
