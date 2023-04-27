@@ -1,6 +1,6 @@
-const { rest } = require('msw');
+import {rest} from "msw";
 
-const handlers = [
+export const handlers = [
     rest.get('/tech', (req, res, ctx) => {
         return res(
             ctx.status(200),
@@ -203,4 +203,3 @@ const handlers = [
     }),
 ];
 
-module.exports = { handlers };

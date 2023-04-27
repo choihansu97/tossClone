@@ -1,10 +1,16 @@
-const { createServer } = require('http');
-const { setupServer } = require('msw/node');
-const { app } = require('./app');
-const {handlers} = require('./src/handlers');
+const express = require('express');
+const path = require('path');
 
-const server = createServer(setupServer(...handlers), app);
+const app = express();
 
-server.listen(3000, () => {
+app.use('/src/dist', express.static(path.join(__dirname, 'src', 'dist')));
+
+app.use('/mockServiceWorker.js', express.static(path.join(__dirname, 'public/mockServiceWorker.js')));
+
+app.get('/*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'src', 'dist', 'index.html'));
+});
+
+app.listen(3000, () => {
     console.log(`Server listening on http://localhost:3000`)
 });

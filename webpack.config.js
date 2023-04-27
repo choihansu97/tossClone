@@ -4,10 +4,10 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-    mode: "none",
+    mode: "development",
     entry: {
         index: path.resolve(__dirname, "src", "index.js"),
-        router: path.resolve(__dirname, "src", "router.js"),
+        msw: path.resolve(__dirname, "src", "mocks", "mswServer.js"),
     },
 
     output: {
@@ -32,7 +32,7 @@ module.exports = {
             {
                 test: /\.html$/i,
                 loader: "html-loader",
-            },
+            }
         ],
     },
 };
