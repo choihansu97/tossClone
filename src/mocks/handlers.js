@@ -1,7 +1,7 @@
 import {rest} from "msw";
 
 export const handlers = [
-    rest.get('/tech', (req, res, ctx) => {
+    rest.get('/tech/articles', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json([
@@ -89,7 +89,7 @@ export const handlers = [
         );
     }),
 
-    rest.get('/design', (req,res,ctx) => {
+    rest.get('/design/articles', (req,res,ctx) => {
         return res(
             ctx.status = 200,
             ctx.json([
@@ -187,8 +187,7 @@ export const handlers = [
         )
     }),
 
-
-    rest.get('/article/:id', (req, res, ctx) => {
+    rest.get('/tech/articles/:id', (req, res, ctx) => {
         const { id } = req.params;
         return res(
             ctx.status(200),
@@ -201,5 +200,19 @@ export const handlers = [
             })
         );
     }),
+
+  rest.get('/design/articles/:id', (req, res, ctx) => {
+    const { id } = req.params;
+    return res(
+      ctx.status(200),
+      ctx.json({
+        id: `${id}`,
+        thumbnail: `${id}.png`,
+        title: `콘텐츠내용입니다.`,
+        content: `콘텐츠${id}입니다.`,
+        createDate: `2023,02,${id}`,
+      })
+    );
+  }),
 ];
 
