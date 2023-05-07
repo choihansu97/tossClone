@@ -1,3 +1,5 @@
+import Logo from '../../assets/images/tossLogo.png'
+
 class Header extends HTMLElement {
   constructor() {
     super();
@@ -6,7 +8,7 @@ class Header extends HTMLElement {
       <header>
         <div>
           <a href="/tech">
-            <img src='./tossLogo.png' alt="토스 로고">
+            <img src="${Logo}" alt="토스 로고">
           </a>
         </div>
         
