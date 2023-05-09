@@ -1,5 +1,5 @@
 export class DesignDto {
-    constructor(id, category, thumbnail, title, content, createDate, editorName, editorPosition, editorImageUrl, editorEmail) {
+    constructor(id, category, thumbnail, title, content, createDate, editorName, editorPosition, editorImageUrl, editorContent) {
         this.id = id;
         this.category = category;
         this.thumbnail = thumbnail;
@@ -10,7 +10,7 @@ export class DesignDto {
             name: editorName,
             position: editorPosition,
             imageUrl: editorImageUrl,
-            email: editorEmail,
+            content : editorContent
         };
     }
 }
