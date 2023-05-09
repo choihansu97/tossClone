@@ -1,13 +1,14 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const path = require("path");
 
 module.exports = {
     mode: "development",
     entry: {
-        index: path.resolve(__dirname, "src", "index.js"),
         msw: path.resolve(__dirname, "src", "mocks", "mswServer.js"),
+        index: path.resolve(__dirname, "src", "index.js"),
     },
 
     output: {
@@ -25,6 +26,9 @@ module.exports = {
         new CleanWebpackPlugin({
             cleanAfterEveryBuildPatterns: ["dist"],
         }),
+        new MiniCssExtractPlugin({
+            filename: 'app.css'
+        })
     ],
 
     module: {
@@ -32,7 +36,15 @@ module.exports = {
             {
                 test: /\.html$/i,
                 loader: "html-loader",
-            }
+            },
+            {
+                test: /\.css$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+            },
         ],
     },
 };
