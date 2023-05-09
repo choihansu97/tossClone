@@ -3,7 +3,7 @@ const contentType = {
   formData: "multipart/form-data"
 };
 
-class HttpClient {
+export class HttpClient {
   baseUrl = "";
   baseParams = {
     headers: {}
