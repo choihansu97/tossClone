@@ -1,3 +1,5 @@
+import headerImage from '../../assets/images/tossLogo.png'
+
 class Header extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `          
@@ -5,7 +7,7 @@ class Header extends HTMLElement {
             <div class="container-inner">
                 <div class="logo-wrapper">
                   <a href="/tech">
-                    <img src='../../assets/images/tossLogo.png' alt="토스 로고">
+                    <img src='${headerImage}' alt="토스 로고">
                   </a>
                 </div>
                 

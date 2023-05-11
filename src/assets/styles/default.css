@@ -1,9 +1,5 @@
 @import "fonts.css";
 
-html {
-    font-size: 62.5%;
-}
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -21,6 +17,8 @@ time, mark, audio, video {
     padding: 0;
     border: 0;
     font: inherit;
+    font-size: 62.5%;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     vertical-align: baseline;
     box-sizing: border-box;
 }
@@ -33,26 +31,21 @@ footer, header, hgroup, menu, nav, section {
 body {
     line-height: 1;
     background-color: white;
-    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 ol, ul, li {
     list-style: none;
 }
 
-blockquote, q {
-    quotes: none;
+a {
+    text-decoration: none;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
-    content: none;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
+button {
+    border: none;
+    border-radius: var(--btn-border-radius);
+    cursor: pointer;
+    transition: background .2s ease, color .1s ease;
 }
 
 /*@media (prefers-color-scheme: dark) {*/

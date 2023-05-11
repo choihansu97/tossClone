@@ -4,6 +4,11 @@
 @import 'default.css';
 @import 'variables.css';
 
-img {
-    width: 600px;
+.article-image {
+    width: 240px;
+    height: 240px;
+    margin-right: 48px;
+    border-radius: 14px;
+    object-fit: cover;
+    transition: 0.2s ease-in-out;
 }

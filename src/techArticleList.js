@@ -27,7 +27,7 @@ export default class extends AbstractView {
       articleHtml += `
       <li>
         <a href="/article/${article.id}">
-          <img src="${article.thumbnail}" alt="${article.title}">
+          <img class='article-image' src="${article.thumbnail}" alt="${article.title}">
           <div>
             <h2>${article.title}</h2>
             <p>${article.content}</p>
