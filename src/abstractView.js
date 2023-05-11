@@ -1,3 +1,6 @@
+import './components/header/header';
+import './components/footer/footer'
+
 export default class AbstractView {
   setTitle(title) {
     document.title = title;
@@ -12,7 +15,11 @@ export default class AbstractView {
 
   async render(target) {
     if (target) {
-      target.innerHTML = await this.template();
+      target.innerHTML = `
+        <app-header></app-header>
+        ${this.template()}
+        <app-footer></app-footer>
+      `
     }
   }
 }

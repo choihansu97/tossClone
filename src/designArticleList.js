@@ -51,7 +51,10 @@ export default class extends AbstractView {
   async render(target) {
     const designArticleList = await this.setup();
     if (target) {
-      target.innerHTML = await this.template(designArticleList);
+      target.innerHTML = `
+        <app-header></app-header>
+        ${this.template(designArticleList)}
+        <app-footer></app-footer>`;
     }
   }
 }

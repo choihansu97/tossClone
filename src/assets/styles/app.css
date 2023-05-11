@@ -1,2 +1,9 @@
-@import 'default.css';
+@import './component/header.css';
+@import './component/footer.css';
 
+@import 'default.css';
+@import 'variables.css';
+
+img {
+    width: 600px;
+}

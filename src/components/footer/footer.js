@@ -1,8 +1,6 @@
 class Footer extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: "open" });
-    this.shadowRoot.innerHTML = `
+  connectedCallback() {
+    this.innerHTML = `
       <footer>
         <div>
           <section>
