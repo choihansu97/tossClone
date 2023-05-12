@@ -40,10 +40,12 @@ export default class extends AbstractView {
 
     return `
     <main class="main-article-container">
-      <h1 class="main-article-header-title">디자인</h1>
-      <ul class="main-article-list">
-        ${articleHtml}
-      </ul>
+      <div class="main-article-wrapper">
+        <h1 class="main-article-header-title">디자인</h1>
+        <ul class="main-article-list">
+          ${articleHtml}
+        </ul>
+      </div>
     </main>
   `;
   }

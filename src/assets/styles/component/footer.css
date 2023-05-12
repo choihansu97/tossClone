@@ -1,7 +1,3 @@
-.footer-container {
-
-}
-
 .footer-inner {
     background: var(--gray100);
 }
@@ -25,7 +21,6 @@
 
 .footer-career-content > img {
     width: 186px;
-    height: 186px;
 }
 
 .footer-career-text {

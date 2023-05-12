@@ -11,7 +11,13 @@ class Header extends HTMLElement {
                   </a>
                 </div>
                 
-                <nav>
+                <div class="mobile-nav-button">
+                    <button class="mobile-nav-dropdown-toggle" aria-expanded="false" aria-controls="header-poistion-wrapper">
+                    버튼입니다.
+                    </button>
+                </div>
+                
+                <nav aria-describedby="header-poistion-wrapper">
                   <ul class="position-list">
                     <li class="content-position"><a href="/design">디자인</a></li>
                     <li class="content-position"><a href="/tech">개발</a></li>

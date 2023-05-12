@@ -4,6 +4,8 @@
 @import './page/articleList.css';
 @import './page/articleView.css';
 
+@import './component/responsiveHedaer.css';
+
 @import 'default.css';
 @import 'variables.css';
 

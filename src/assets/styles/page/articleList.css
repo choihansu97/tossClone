@@ -1,10 +1,12 @@
-/*margin-bototm때문에 안에 하나 더 감싸야함*/
 .main-article-container {
     max-width: 900px;
-    width: 100%;
-    padding: 0 40px;
+    margin: 0 auto 232px auto;
+}
+
+.main-article-wrapper {
+    width: 92%;
+    max-width: calc(100% - 48px);
     margin: 0 auto;
-    margin-bottom: 232px;
 }
 
 .main-article-header-title {
