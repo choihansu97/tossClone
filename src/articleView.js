@@ -11,6 +11,7 @@ export default class extends AbstractView {
   }
 
   async setup() {
+    window.scrollTo(0,0);
     const client = new HttpClient({ baseUrl: this.url });
     const response = await client.get({ path: `/api/articles/:id`, requestParams: this.id });
     const articleView = new ArticleDto(
@@ -23,21 +24,30 @@ export default class extends AbstractView {
 
   template(articleView) {
     let articleHtml = `
-      <div>
-          <img src="${articleView.thumbnail}" alt="${articleView.title}">
-          <h2>${articleView.title}</h2>
-          <div>
-            <img src="${articleView.editor.imageUrl}" alt="${articleView.title}">
-            ${articleView.editor.name}
-            ${articleView.editor.position}
-            ${articleView.createDate}
+      <article class="article-view-inner">
+          <img class= "article-view-image" src="${articleView.thumbnail}" alt="${articleView.title}">
+
+          <h2 class="article-view-title">${articleView.title}</h2>
+          
+          <div class="article-view-author">
+            <img class="article-view-author-image" src="${articleView.editor.imageUrl}" alt="${articleView.title}">
+            
+            <section class="article-view-author-about">
+              <div class="article-author-about-profile">
+                <span class="article-author-about-name">${articleView.editor.name}</span>
+                <span class="article-author-about-position">ㆍ${articleView.editor.position}</span>
+              </div>
+              
+              <div class="article-posted-date">${articleView.createDate}</div>
+            </section>
           </div>
-          <p>${articleView.editor.content}</p>
-      </div>
+          
+          <p class="article-view-content">${articleView.editor.content}</p>
+      </article>
     `;
 
     return `
-    <main>
+    <main class="article-view-container">
       ${articleHtml}
     </main>
   `;

@@ -1,5 +1,5 @@
 /*margin-bototm때문에 안에 하나 더 감싸야함*/
-.main-container {
+.main-article-container {
     max-width: 900px;
     width: 100%;
     padding: 0 40px;
