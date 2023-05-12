@@ -25,13 +25,13 @@ export default class extends AbstractView {
     let articleHtml = "";
     for (const article of designArticleList) {
       articleHtml += `
-      <li>
-        <a href="/article/${article.id}">
-          <img src="${article.thumbnail}" alt="${article.title}">
-          <div>
-            <h2>${article.title}</h2>
-            <p>${article.content}</p>
-            <p>${article.createDate}</p>
+      <li class="article-list-item">
+        <a class='article-list-item-target' href="/article/${article.id}">
+          <img class='article-image' src="${article.thumbnail}" alt="${article.title}">
+          <div class="article-list-item-detail">
+            <h2 class="article-item-title">${article.title}</h2>
+            <p class="article-item-detail">${article.content}</p>
+            <p class="article-item-date">${article.createDate}</p>
           </div>
         </a>
       </li>
@@ -39,12 +39,12 @@ export default class extends AbstractView {
     }
 
     return `
-    <div>
-      <h1>디자인</h1>
-      <ul>
+    <main class="main-container">
+      <h1 class="main-article-header-title">디자인</h1>
+      <ul class="main-article-list">
         ${articleHtml}
       </ul>
-    </div>
+    </main>
   `;
   }
 

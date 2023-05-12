@@ -22,6 +22,20 @@ class Header extends HTMLElement {
           </header>
         `;
     }
+
+    //TODO 헤더 스크롤 시 고정
+    static get observedAttributes() {
+        const headerPosition = document.querySelector('.header-container');
+        const scrollThreshold = 50;
+
+        window.addEventListener('scroll', () => {
+            if(window.pageYOffset > 0) {
+                headerPosition.classList.add('header-container-fixed')
+            } else {
+                headerPosition.classList.remove('header-container-fixed')
+            }
+        })
+    }
 }
 
 customElements.define("app-header", Header);

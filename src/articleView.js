@@ -14,7 +14,7 @@ export default class extends AbstractView {
     const client = new HttpClient({ baseUrl: this.url });
     const response = await client.get({ path: `/api/articles/:id`, requestParams: this.id });
     const articleView = new ArticleDto(
-        response.data.id, response.data.category, response.data.thumbnail, response.data.title, response.data.content, response.data.createDate, response.data.editorName, response.data.editorPosition, response.data.editorImageUrl, response.data.editorEmail
+        response.data.id, response.data.category, response.data.thumbnail, response.data.title, response.data.content, response.data.createDate, response.data.editor.name, response.data.editor.position, response.data.editor.imageUrl, response.data.editor.content
     );
 
     document.title = articleView.title;
@@ -23,19 +23,23 @@ export default class extends AbstractView {
 
   template(articleView) {
     let articleHtml = `
-          <div>
-          <p>${articleView.id}</p>
+      <div>
           <img src="${articleView.thumbnail}" alt="${articleView.title}">
           <h2>${articleView.title}</h2>
-          <p>${articleView.content}</p>
-          <p>${articleView.createDate}</p>
+          <div>
+            <img src="${articleView.editor.imageUrl}" alt="${articleView.title}">
+            ${articleView.editor.name}
+            ${articleView.editor.position}
+            ${articleView.createDate}
+          </div>
+          <p>${articleView.editor.content}</p>
       </div>
     `;
 
     return `
-    <div>
+    <main>
       ${articleHtml}
-    </div>
+    </main>
   `;
   }
 

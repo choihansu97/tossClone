@@ -46,7 +46,7 @@ class Footer extends HTMLElement {
               </section>
               
               <address class="footer-address">
-                <strong class="footer-address-company-name">(㈜비바리퍼블리카</strong>
+                <strong class="footer-address-company-name">㈜비바리퍼블리카</strong>
                 <small class="footer-copyright">Copyright © Viva Republica, Inc. All Rights Reserved.</small>
               </address>
               
