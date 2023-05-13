@@ -1,8 +1,8 @@
-import headerImage from '../../assets/images/tossLogo.png'
+import headerImage from "../../assets/images/tossLogo.png";
 
 class Header extends HTMLElement {
-    connectedCallback() {
-        this.innerHTML = `          
+  connectedCallback() {
+    this.innerHTML = `          
           <header class="header-container">
             <div class="container-inner">
                 <div class="logo-wrapper">
@@ -11,37 +11,48 @@ class Header extends HTMLElement {
                   </a>
                 </div>
                 
-                <div class="mobile-nav-button">
-                    <button class="mobile-nav-dropdown-toggle" aria-expanded="false" aria-controls="header-poistion-wrapper">
-                    버튼입니다.
+                 <div class="mobile-nav-button">
+                    <button class="mobile-nav-dropdown-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="line-icon">
+                            <path fill="#B0B8C1" d="M4.118 6.2h16a1.2 1.2 0 100-2.4h-16a1.2 1.2 0 100 2.4m16 4.6h-16a1.2 1.2 0 100 2.4h16a1.2 1.2 0 100-2.4m0 7h-16a1.2 1.2 0 100 2.4h16a1.2 1.2 0 100-2.4" fill-rule="evenodd"></path>
+                        </svg>
                     </button>
                 </div>
-                
-                <nav aria-describedby="header-poistion-wrapper">
-                  <ul class="position-list">
-                    <li class="content-position"><a href="/design">디자인</a></li>
-                    <li class="content-position"><a href="/tech">개발</a></li>
-                    <li class="content-position"><button>채용 바로가기</button></li>
-                  </ul>
+                    
+                <nav class="header-position-wrapper">                
+                   <ul class="position-list">
+                      <li class="content-position"><a href="/design">디자인</a></li>
+                      <li class="content-position"><a href="/tech">개발</a></li>
+                      <li class="content-position"><button>채용 바로가기</button></li>
+                    </ul>
                 </nav>
             </div>
           </header>
         `;
+
+    const headerPosition = this.querySelector(".header-container");
+
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 0) {
+        headerPosition.classList.add("header-container-fixed");
+      } else {
+        headerPosition.classList.remove("header-container-fixed");
+      }
+    });
+
+    const menuToggleButton = this.querySelector(".mobile-nav-button");
+    const menuContentList = this.querySelector(".header-position-wrapper");
+
+    const isMenuOpen = localStorage.getItem('isMenuOpen') === 'true';
+    if (isMenuOpen) {
+      menuContentList.classList.add('show-menu-list');
     }
 
-    //TODO 헤더 스크롤 시 고정
-    static get observedAttributes() {
-        const headerPosition = document.querySelector('.header-container');
-        const scrollThreshold = 50;
-
-        window.addEventListener('scroll', () => {
-            if(window.pageYOffset > 0) {
-                headerPosition.classList.add('header-container-fixed')
-            } else {
-                headerPosition.classList.remove('header-container-fixed')
-            }
-        })
-    }
+    menuToggleButton.addEventListener("click", () => {
+      menuContentList.classList.toggle("show-menu-list");
+      localStorage.setItem('isMenuOpen', menuContentList.classList.contains('show-menu-list'));
+    });
+  }
 }
 
 customElements.define("app-header", Header);

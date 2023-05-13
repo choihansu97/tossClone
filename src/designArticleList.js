@@ -1,4 +1,4 @@
-import {HttpClient} from "../http";
+import { HttpClient } from "../http";
 import AbstractView from "./abstractView";
 import { DesignDto } from "./dto/designDto";
 
@@ -12,10 +12,22 @@ export default class extends AbstractView {
 
   async setup() {
     const client = new HttpClient({ baseUrl: this.url });
-    const response = await client.get({ path: "/api/articles?category=design" });
+    const response = await client.get({
+      path: "/api/articles?category=design",
+    });
     const designArticleList = response.data.map(
-        article => new DesignDto(
-            article.id, article.category, article.thumbnail, article.title, article.content, article.createDate, article.editorName, article.editorPosition, article.editorImageUrl, article.editorEmail
+      (article) =>
+        new DesignDto(
+          article.id,
+          article.category,
+          article.thumbnail,
+          article.title,
+          article.content,
+          article.createDate,
+          article.editorName,
+          article.editorPosition,
+          article.editorImageUrl,
+          article.editorEmail
         )
     );
     return designArticleList;

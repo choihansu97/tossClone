@@ -1,17 +1,17 @@
 class ArticleList extends HTMLElement {
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    set articles(value) {
-        this._articles = value;
-        this.render();
-    }
+  set articles(value) {
+    this._articles = value;
+    this.render();
+  }
 
-    render() {
-        let articleHtml = "";
-        for (const article of this._articles) {
-            articleHtml += `
+  render() {
+    let articleHtml = "";
+    for (const article of this._articles) {
+      articleHtml += `
         <li>
           <a href="/article/${article.id}">
             <img src="${article.thumbnail}" alt="${article.title}">
@@ -23,9 +23,9 @@ class ArticleList extends HTMLElement {
           </a>
         </li>
       `;
-        }
+    }
 
-        this.innerHTML = `
+    this.innerHTML = `
       <div>
         <h1>개발</h1>
         <ul>
@@ -33,5 +33,5 @@ class ArticleList extends HTMLElement {
         </ul>
       </div>
     `;
-    }
+  }
 }

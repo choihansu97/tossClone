@@ -1,4 +1,4 @@
-import {HttpClient} from "../http";
+import { HttpClient } from "../http";
 import AbstractView from "./abstractView";
 import { ArticleDto } from "./dto/articleDto";
 
@@ -11,11 +11,23 @@ export default class extends AbstractView {
   }
 
   async setup() {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
     const client = new HttpClient({ baseUrl: this.url });
-    const response = await client.get({ path: `/api/articles/:id`, requestParams: this.id });
+    const response = await client.get({
+      path: `/api/articles/:id`,
+      requestParams: this.id,
+    });
     const articleView = new ArticleDto(
-        response.data.id, response.data.category, response.data.thumbnail, response.data.title, response.data.content, response.data.createDate, response.data.editor.name, response.data.editor.position, response.data.editor.imageUrl, response.data.editor.content
+      response.data.id,
+      response.data.category,
+      response.data.thumbnail,
+      response.data.title,
+      response.data.content,
+      response.data.createDate,
+      response.data.editor.name,
+      response.data.editor.position,
+      response.data.editor.imageUrl,
+      response.data.editor.content
     );
 
     document.title = articleView.title;
@@ -59,7 +71,7 @@ export default class extends AbstractView {
       target.innerHTML = `
         <app-header></app-header>
         ${this.template(articleView)}
-        <app-footer></app-footer>`
+        <app-footer></app-footer>`;
     }
   }
 }

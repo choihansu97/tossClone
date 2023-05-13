@@ -1,8 +1,8 @@
 import alphaImage from "../../assets/images/alpha.png";
 
 class Footer extends HTMLElement {
-    connectedCallback() {
-        this.innerHTML = `
+  connectedCallback() {
+    this.innerHTML = `
       <footer class="footer-container">
         <div class="footer-inner">
           <section class="footer-career">
@@ -85,7 +85,7 @@ class Footer extends HTMLElement {
         </div>
       </footer>
       `;
-    }
+  }
 }
 
 customElements.define("app-footer", Footer);

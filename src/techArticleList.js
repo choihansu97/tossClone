@@ -1,4 +1,4 @@
-import {HttpClient} from "../http";
+import { HttpClient } from "../http";
 import AbstractView from "./abstractView";
 import { TechDto } from "./dto/techDto";
 
@@ -14,9 +14,20 @@ export default class extends AbstractView {
     const client = new HttpClient({ baseUrl: this.url });
     const response = await client.get({ path: "/api/articles?category=tech" });
     const techArticleList = response.data.map(
-        article => new TechDto(
-            article.id, article.category, article.thumbnail, article.title, article.content, article.createDate, article.editorName, article.editorPosition, article.editorImageUrl, article.editorEmail
-        ));
+      (article) =>
+        new TechDto(
+          article.id,
+          article.category,
+          article.thumbnail,
+          article.title,
+          article.content,
+          article.createDate,
+          article.editorName,
+          article.editorPosition,
+          article.editorImageUrl,
+          article.editorEmail
+        )
+    );
 
     return techArticleList;
   }
@@ -52,7 +63,7 @@ export default class extends AbstractView {
 
   async render(target) {
     const techArticleList = await this.setup();
-    if(target) {
+    if (target) {
       target.innerHTML = `
       <app-header></app-header>
       ${this.template(techArticleList)}

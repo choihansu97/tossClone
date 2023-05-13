@@ -1,13 +1,12 @@
-import './components/header/header';
-import './components/footer/footer'
+import "./components/header/header";
+import "./components/footer/footer";
 
 export default class AbstractView {
   setTitle(title) {
     document.title = title;
   }
 
-  async setup() {
-  }
+  async setup() {}
 
   template() {
     return "";
@@ -19,7 +18,7 @@ export default class AbstractView {
         <app-header></app-header>
         ${this.template()}
         <app-footer></app-footer>
-      `
+      `;
     }
   }
 }
