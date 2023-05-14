@@ -1,0 +1,18 @@
+:root {
+  --primary-color: #1b64da;
+
+  --blue500: #3182f6;
+  --blue50 : #e8f3ff;
+  --gray800: #333d4b;
+  --gray700: #4e5968;
+  --gray600: #6b7684;
+  --gray500: #8b95a1;
+  --gray100: #f9fafb;
+  --white: white;
+
+  --gray-opacity: rgba(2, 32, 71, 0.05);
+  --hover-button-color: #1b64da;
+  --hover-text-color: #3182f6;
+
+  --btn-border-radius: 6px;
+}
