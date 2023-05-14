@@ -55,6 +55,18 @@ export default class extends AbstractView {
           </div>
           
           <p class="article-view-content">${articleView.editor.content}</p>
+          
+          <section class="article-view-reaction">
+            <h2 class="article-view-reaction-title">재미있게 읽으셨나요?</h2>
+            <p class="article-view-reaction-sub-title">좋았는지, 아쉬웠는지, 아래 이모지를 눌러 의견을 들려주세요.</p>
+            
+            <div class="article-view-reaction-choice">
+                <div class="article-reaction-happy"><a href="#">😍</a></div>
+                <div class="article-reaction-not-bad"><a href="#">🤔</a></div>
+            </div>
+            
+            <button class="article-view-link">아티클 공유하기</button>
+          </section>
       </article>
     `;
 

@@ -27,6 +27,14 @@
     right: 20px;
   }
 
+  .mobile-nav-dropdown-toggle:hover {
+    background: #efefef;
+  }
+
+  .icon-close {
+    display: none;
+  }
+
   .show-menu-list {
     display: flex;
     flex-direction: column;

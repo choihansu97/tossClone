@@ -24,10 +24,10 @@ export default class extends AbstractView {
           article.title,
           article.content,
           article.createDate,
-          article.editorName,
-          article.editorPosition,
-          article.editorImageUrl,
-          article.editorEmail
+          article.editor.name,
+          article.editor.position,
+          article.editor.imageUrl,
+          article.editor.content
         )
     );
     return designArticleList;
