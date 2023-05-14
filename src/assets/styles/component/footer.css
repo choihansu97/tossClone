@@ -1,132 +1,132 @@
 .footer-inner {
-  background: var(--gray100);
+    background: var(--gray100);
 }
 
 .footer-career {
-  padding: 60px 24px;
-  background: rgba(2, 9, 19, 0.91);
-  word-break: keep-all;
-  overflow-wrap: break-word;
+    padding: 60px 24px;
+    background: rgba(2, 9, 19, 0.91);
+    word-break: keep-all;
+    overflow-wrap: break-word;
 }
 
 .footer-career-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  column-gap: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 20px;
 
-  max-width: 640px;
-  margin: 0 auto;
+    max-width: 640px;
+    margin: 0 auto;
 }
 
 .footer-career-content > img {
-  width: 186px;
+    width: 186px;
 }
 
 .footer-career-text {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .footer-career-text > h3 {
-  line-height: 1.4;
-  color: var(--white);
-  font-size: 2.6rem;
-  font-weight: 600;
+    line-height: 1.4;
+    color: var(--white);
+    font-size: 2.6rem;
+    font-weight: 600;
 }
 
 .footer-career-text > p {
-  line-height: 1.5;
-  color: #e5e8eb;
-  font-size: 1.7rem;
-  font-weight: 400;
+    line-height: 1.5;
+    color: #e5e8eb;
+    font-size: 1.7rem;
+    font-weight: 400;
 }
 
 .footer-career-text p:first-of-type {
-  margin-top: 8px;
+    margin-top: 8px;
 }
 
 .footer-career-text > button {
-  width: 144px;
-  height: 40px;
-  margin-top: 24px;
-  background: var(--blue500);
-  color: var(--white);
-  font-size: 1.5rem;
-  font-weight: 500;
+    width: 144px;
+    height: 40px;
+    margin-top: 24px;
+    background: var(--blue500);
+    color: var(--white);
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
 .footer-site-group-inner {
-  max-width: 1064px;
-  padding: 0 59px 100px;
-  margin: 0 auto;
+    max-width: 1064px;
+    padding: 0 59px 100px;
+    margin: 0 auto;
 }
 
 .footer-site-group-list {
-  display: flex;
-  padding: 50px 0;
+    display: flex;
+    padding: 50px 0;
 }
 
 .footer-site-group {
-  width: 170px;
-  line-height: 30px;
+    width: 170px;
+    line-height: 30px;
 }
 
 .footer-site-group:last-of-type {
-  flex: 1;
+    flex: 1;
 }
 
 .footer-site-group-title {
-  padding-bottom: 5px;
-  color: var(--gray800);
-  font-size: 1.5rem;
-  font-weight: 600;
+    padding-bottom: 5px;
+    color: var(--gray800);
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 .footer-site-group-item > li > a {
-  color: var(--gray600);
-  font-size: 1.5rem;
-  font-weight: 400;
+    color: var(--gray600);
+    font-size: 1.5rem;
+    font-weight: 400;
 }
 
 .footer-site-group-item > li > a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .footer-address {
-  display: flex;
-  flex-direction: column;
-  line-height: 20px;
-  margin-bottom: 70px;
+    display: flex;
+    flex-direction: column;
+    line-height: 20px;
+    margin-bottom: 70px;
 }
 
 .footer-address-company-name {
-  padding-bottom: 16px;
-  color: var(--gray800);
-  font-size: 1.6rem;
-  font-weight: 600;
-  letter-spacing: -0.12rem;
+    padding-bottom: 16px;
+    color: var(--gray800);
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: -0.12rem;
 }
 
 .footer-copyright {
-  color: var(--gray500);
-  font-size: 1.3rem;
-  font-weight: 300;
+    color: var(--gray500);
+    font-size: 1.3rem;
+    font-weight: 300;
 }
 
 .footer-social-list {
-  display: flex;
-  margin-bottom: 16px;
+    display: flex;
+    margin-bottom: 16px;
 }
 
 .footer-social-item:not(:last-child) {
-  margin-right: 8px;
+    margin-right: 8px;
 }
 
 .footer-social-item > a > img {
-  width: 36px;
-  height: 36px;
-  opacity: 0.7;
+    width: 36px;
+    height: 36px;
+    opacity: 0.7;
 }
