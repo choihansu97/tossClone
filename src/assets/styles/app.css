@@ -8,6 +8,7 @@
 @import "/component/responsiveFooter.css";
 
 @import "./page/responsiveArticleList.css";
+@import "./page/responsiveArticleView.css";
 
 @import "default.css";
 @import "variables.css";
