@@ -5,6 +5,7 @@
 @import "./page/articleView.css";
 
 @import "./component/responsiveHedaer.css";
+@import "/component/responsiveFooter.css";
 
 @import "default.css";
 @import "variables.css";
