@@ -5,7 +5,7 @@ import {ArticleDto, EditorDto} from "./dto/articleDto";
 const API_BASE_URL = "http://localhost:3000";
 
 export default class extends AbstractView {
-    constructor(id,category) {
+    constructor(id, category) {
         super();
         this.id = id;
         this.category = category;
@@ -14,31 +14,37 @@ export default class extends AbstractView {
     async setup() {
         window.scrollTo(0, 0);
         const client = new HttpClient({baseUrl: API_BASE_URL});
-        const response = await client.get({
-            path: `/api/${this.category}/articles/:id`,
-            requestParams: this.id,
-        });
 
-        const editor = new EditorDto(
-            response.data.editor.imageUrl,
-            response.data.editor.name,
-            response.data.editor.position,
-            response.data.editor.content
-        )
+        try {
+            const response = await client.get({
+                path: `/api/${this.category}/articles/:id`,
+                requestParams: this.id,
+            });
 
-        const articleView = new ArticleDto(
-            response.data.id,
-            response.data.category,
-            response.data.thumbnail,
-            response.data.title,
-            response.data.content,
-            response.data.createDate,
-            editor
-        );
-        articleView.validate();
+            const editor = new EditorDto(
+                response.data.editor.imageUrl,
+                response.data.editor.name,
+                response.data.editor.position,
+                response.data.editor.content
+            )
 
-        document.title = articleView.title;
-        return articleView;
+            const articleView = new ArticleDto(
+                response.data.id,
+                response.data.category,
+                response.data.thumbnail,
+                response.data.title,
+                response.data.content,
+                response.data.createDate,
+                editor
+            );
+            articleView.validate();
+
+            document.title = articleView.title;
+            return articleView;
+        } catch (error) {
+            console.log(error);
+            location.href = `${API_BASE_URL}/404`;
+        }
     }
 
     template(articleView) {
@@ -84,13 +90,26 @@ export default class extends AbstractView {
   `;
     }
 
+    // async render(target) {
+    //     const articleView = await this.setup();
+    //     if (target) {
+    //         target.innerHTML = `
+    //             <app-header></app-header>
+    //             ${this.template(articleView)}
+    //             <app-footer></app-footer>`;
+    //     }
+    // }
+
     async render(target) {
         const articleView = await this.setup();
-        if (target) {
-            target.innerHTML = `
-        <app-header></app-header>
-        ${this.template(articleView)}
-        <app-footer></app-footer>`;
-        }
+        target.innerHTML = `<app-header></app-header>`
+
+        const main = document.createElement('main');
+        main.innerHTML = `
+            ${this.template(articleView)}
+        `;
+
+        target.appendChild(main);
+        target.innerHTML += `<app-footer></app-footer>`;
     }
 }

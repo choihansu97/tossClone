@@ -3,6 +3,7 @@ import "./assets/styles/app.css";
 import tech from "./techArticleList.js";
 import design from "./designArticleList.js";
 import articleView from "./articleView.js";
+import notFoundPage from './pages/notFoundPage';
 
 const router = new CreateRouter();
 
@@ -13,7 +14,7 @@ const components = {
     design: () => new design().render(app),
     techArticle: (id) => new articleView(id, 'tech').render(app),
     designArticle: (id) => new articleView(id, 'design').render(app),
-    notFoundComponent: () => (app.innerText = "404 Not Found"),
+    notFoundComponent: () => (new notFoundPage().render(app)),
 };
 
 router
