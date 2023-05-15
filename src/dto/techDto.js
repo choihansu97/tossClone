@@ -1,13 +1,13 @@
 export class EditorDto {
-    constructor(name, position, imageUrl, content) {
+    constructor(imageUrl, name, position, content) {
+        this.imageUrl = imageUrl;
         this.name = name;
         this.position = position;
-        this.imageUrl = imageUrl;
         this.content = content;
     }
 
     validate() {
-        if (!this.name || !this.position || !this.imageUrl || !this.content) {
+        if (!this.imageUrl || !this.name || !this.position || !this.content) {
             throw new Error('Editor 정보가 유효하지 않습니다.');
         }
     }
@@ -27,6 +27,6 @@ export class TechDto {
     }
 
     validate() {
-        this.editor.validate();
+        this.editor.forEach(editor => editor.validate());
     }
 }
