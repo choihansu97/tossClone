@@ -2,27 +2,30 @@ import {HttpClient} from "../http";
 import AbstractView from "./abstractView";
 import {ArticleDto, EditorDto} from "./dto/articleDto";
 
-export default class extends AbstractView {
-    url = "http://localhost:3000";
+const API_BASE_URL = "http://localhost:3000";
 
-    constructor(id) {
+export default class extends AbstractView {
+    constructor(id,category) {
         super();
         this.id = id;
+        this.category = category;
     }
 
     async setup() {
         window.scrollTo(0, 0);
-        const client = new HttpClient({baseUrl: this.url});
+        const client = new HttpClient({baseUrl: API_BASE_URL});
         const response = await client.get({
-            path: `/api/articles/:id`,
+            path: `/api/${this.category}/articles/:id`,
             requestParams: this.id,
         });
+
         const editor = new EditorDto(
+            response.data.editor.imageUrl,
             response.data.editor.name,
             response.data.editor.position,
-            response.data.editor.imageUrl,
             response.data.editor.content
         )
+
         const articleView = new ArticleDto(
             response.data.id,
             response.data.category,

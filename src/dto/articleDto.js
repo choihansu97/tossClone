@@ -1,8 +1,8 @@
 export class EditorDto {
-  constructor(name, position, imageUrl, content) {
+  constructor(imageUrl, name, position, content) {
+    this.imageUrl = imageUrl;
     this.name = name;
     this.position = position;
-    this.imageUrl = imageUrl;
     this.content = content;
   }
 
