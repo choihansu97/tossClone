@@ -20,10 +20,7 @@ export default class extends AbstractView {
 
     async render(target) {
         if (target) {
-            target.innerHTML = `
-                <app-header></app-header>
-                ${this.template()}
-                <app-footer></app-footer>`;
+            target.innerHTML = `${this.template()}`;
         }
     }
 }

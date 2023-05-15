@@ -49,7 +49,7 @@ export default class extends AbstractView {
 
     template(articleView) {
         let articleHtml = `
-      <article class="article-view-inner">
+      <div class="article-view-inner">
           <img class= "article-view-image" src="${articleView.thumbnail}" alt="${articleView.title}">
 
           <h2 class="article-view-title">${articleView.title}</h2>
@@ -80,36 +80,21 @@ export default class extends AbstractView {
             
             <button class="article-view-link">아티클 공유하기</button>
           </section>
-      </article>
+      </div>
     `;
 
         return `
-    <main class="article-view-container">
-      ${articleHtml}
-    </main>
-  `;
+            <article class="article-view-container">
+              ${articleHtml}
+            </article>
+      `;
     }
-
-    // async render(target) {
-    //     const articleView = await this.setup();
-    //     if (target) {
-    //         target.innerHTML = `
-    //             <app-header></app-header>
-    //             ${this.template(articleView)}
-    //             <app-footer></app-footer>`;
-    //     }
-    // }
 
     async render(target) {
         const articleView = await this.setup();
-        target.innerHTML = `<app-header></app-header>`
 
         const main = document.createElement('main');
-        main.innerHTML = `
-            ${this.template(articleView)}
-        `;
-
+        main.innerHTML = `${this.template(articleView)}`;
         target.appendChild(main);
-        target.innerHTML += `<app-footer></app-footer>`;
     }
 }
