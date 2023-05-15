@@ -1,8 +1,8 @@
 import alphaImage from "../../assets/images/alpha.png";
 
 class Footer extends HTMLElement {
-  connectedCallback() {
-    this.innerHTML = `
+    connectedCallback() {
+        this.innerHTML = `
       <footer class="footer-container">
         <div class="footer-inner">
           <section class="footer-career">
@@ -50,42 +50,43 @@ class Footer extends HTMLElement {
                 <small class="footer-copyright">Copyright © Viva Republica, Inc. All Rights Reserved.</small>
               </address>
               
-              <ul class="footer-social-list">
-                <li class="footer-social-item">
-                  <a href="https://www.facebook.com/toss.revolution" target="_blank" >
-                    <img src="https://static.toss.im/assets/homepage/safety/icn-facebook.svg" alt="Toss Facebook">
-                  </a>
-                </li>
-                
-                <li class="footer-social-item">
-                  <a href="https://blog.toss.im" target="_blank">
-                   <img src="https://static.toss.im/assets/homepage/safety/icn-blog.svg" alt="Toss blog">
-                  </a>
-                </li>
-                
-                <li class="footer-social-item">
-                  <a aria-label="Toss Naver Post" target="_blank" href="https://post.naver.com/tossblog">
-                    <img src="https://static.toss.im/assets/homepage/safety/icn-naver.svg" alt="Toss Naver Post">
-                  </a>
-                </li>
-                
-                <li class="footer-social-item">
-                  <a href="https://twitter.com/toss__official" target="_blank">
-                    <img src="https://static.toss.im/assets/homepage/safety/icn-twitter.svg" alt="Toss Twitter">
-                  </a>
-                </li>
-                
-                <li class="footer-social-item">
-                  <a href="https://www.instagram.com/toss.im/" target="_blank">
-                    <img src="https://static.toss.im/assets/homepage/safety/icn-instagram.svg" alt="Toss Instagram">
-                  </a>
-                </li>
-              </ul>
+              <ul class="footer-social-list"></ul>
           </article>
         </div>
       </footer>
       `;
-  }
+
+        class SocialItem {
+            constructor() {
+                this.element = document.querySelector('.footer-social-list');
+            }
+
+            createItem(link, imageSrc, alt) {
+                const li = document.createElement('li');
+                li.classList.add('footer-social-item');
+
+                const a = document.createElement('a');
+                a.link = link;
+                a.target = '_blank';
+
+                const img = document.createElement('img');
+                img.src = imageSrc;
+                img.alt = alt;
+
+                a.appendChild(img);
+                li.appendChild(a);
+
+                this.element.appendChild(li);
+            }
+        }
+
+        const footerSocialList = new SocialItem();
+        footerSocialList.createItem('https://www.facebook.com/toss.revolution', 'https://static.toss.im/assets/homepage/safety/icn-facebook.svg', 'Toss Facebook');
+        footerSocialList.createItem('https://blog.toss.im', 'https://static.toss.im/assets/homepage/safety/icn-blog.svg', 'Toss blog');
+        footerSocialList.createItem('https://post.naver.com/tossblog', 'https://static.toss.im/assets/homepage/safety/icn-naver.svg', 'Toss Naver');
+        footerSocialList.createItem('https://twitter.com/toss__official', 'https://static.toss.im/assets/homepage/safety/icn-twitter.svg', 'Toss Twitter');
+        footerSocialList.createItem('https://www.instagram.com/toss.im', 'https://static.toss.im/assets/homepage/safety/icn-instagram.svg', 'Toss Instagram');
+    }
 }
 
 customElements.define("app-footer", Footer);
