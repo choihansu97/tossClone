@@ -6,23 +6,14 @@
 
 <h3 align="center">toss-tech-clone</h3>
 
-
-## 📝 Table of Contents
-
-- [About](#about)
-- [Getting Started](#getting_started)
-- [Deployment](#deployment)
-- [Usage](#usage)
-- [Built Using](#built_using)
-- [TODO](../TODO.md)
-- [Contributing](../CONTRIBUTING.md)
-- [Authors](#authors)
-- [Acknowledgments](#acknowledgement)
-
 ## 🧐 프로젝트 설명 <a name = "about"></a>
 ([toss.tech](https://toss.tech/)) 토스 테크 사이트를 자바스크립트를 이용하여 SPA로 구현하였습니다.
 
 ## 🏁 프로젝트 실행방법 <a name = "getting_started"></a>
+### Requirements
+For building and running the application you need:
+- [Node v18.16.0](https://nodejs.org/ca/blog/release/v18.16.0)
+- [npm 9.6.6](https://www.npmjs.com/package/npm)
 
 ### CLI
 
@@ -32,16 +23,41 @@ npm install
 npm run start
 ```
 
-End with an example of getting some data out of the system or using it for a little demo.
 
 ## 화면구성📺
 ![작업내용](https://github.com/choihansu97/tossClone/assets/60763027/57596e52-c90e-4b9a-88ea-d2bf335cf9bf)
 
+## 작업내용 📦
 
-
-## ⛏️ Built Using <a name = "built_using"></a>
-
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
+## 디렉토리구조
+```
+├── README.md
+├── package-lock.json
+├── package.json
+├── server.js
+├── webpack.config.js
+├── public
+    ├── index.html
+    ├── mockServiceWorker.js
+└── src
+    ├── components
+    |   ├── Header
+    |   |   ├── header.js
+    |   ├── Footer
+    |   |   ├── footer.js
+    ├── lib
+    │   ├── http.js
+    │   ├── abstractView.js
+    ├── pages
+    │   ├── articleView.js
+    │   ├── designArticleList.js
+    │   ├── techArticleList.js
+    │   └── notFoundPage.js
+    ├── assets
+    │   ├── fonts
+    │   ├── images
+    │   ├── styles
+    ├── util
+    │   └── router.js
+    └── index.js
+```
