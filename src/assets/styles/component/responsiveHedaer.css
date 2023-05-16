@@ -96,25 +96,25 @@
 
 /*footer*/
 @media screen and (max-width: 700px) {
-  .footer-career-content {
+  .career__content {
     flex-direction: column;
     align-items: flex-start;
     row-gap: 24px;
   }
 
-  .footer-career-content > img {
+  .career__content > img {
     width: 90px;
   }
 
-  .footer-career-text > h3 {
+  .footer__career__text > h3 {
     font-size: 2rem;
   }
 
-  .footer-career-text > p {
+  .footer__career__text > p {
     font-size: 1.6rem;
   }
 
-  .footer-career-text > button {
+  .footer__career__text > button {
     width: 128px;
     height: 32px;
     font-size: 1.4rem;
@@ -122,17 +122,17 @@
 }
 
 @media screen and (max-width: 640px) {
-  .footer-site-group-inner {
+  .footer__site-group {
     margin-top: 0;
     padding: 60px 40px 80px;
   }
 
-  .footer-site-group-list {
+  .site-group__list {
     padding: 0;
     flex-direction: column;
   }
 
-  .footer-site-group {
+  .site-group__list__item {
     width: 100%;
     padding-bottom: 40px;
   }
