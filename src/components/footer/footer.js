@@ -1,91 +1,124 @@
 import alphaImage from "../../assets/images/alpha.png";
 
 class Footer extends HTMLElement {
+    constructor() {
+        super();
+        this.SiteGroupLinks = {
+            tech: [
+                { url: 'mailto:techblog@toss.im', text: '의견 보내기' }
+            ],
+            toss: [
+                { url: 'https://toss.im', text: '홈페이지' },
+                { url: 'https://team.toss.im', text: '회사 소개' },
+                { url: 'https://toss.im/career', text: '채용' }
+            ],
+            customer: [
+                { url: 'tel:1599-4905', text: '전화: 1599-4905 (24시간 연중무휴)' },
+                { url: 'mailto:support.toss.im', text: '이메일: support@toss.im' },
+                { url: 'https://goto.kakao.com/@toss', text: '카카오톡: @toss' }
+            ]
+        };
+
+        this.socialData = [
+            {
+                link: "https://www.facebook.com/toss.revolution",
+                imageSrc:
+                    "https://static.toss.im/assets/homepage/safety/icn-facebook.svg",
+                alt: "Toss Facebook",
+            },
+            {
+                link: "https://blog.toss.im",
+                imageSrc: "https://static.toss.im/assets/homepage/safety/icn-blog.svg",
+                alt: "Toss blog",
+            },
+            {
+                link: "https://post.naver.com/tossblog",
+                imageSrc: "https://static.toss.im/assets/homepage/safety/icn-naver.svg",
+                alt: "Toss Naver",
+            },
+            {
+                link: "https://twitter.com/toss__official",
+                imageSrc:
+                    "https://static.toss.im/assets/homepage/safety/icn-twitter.svg",
+                alt: "Toss Twitter",
+            },
+            {
+                link: "https://www.instagram.com/toss.im",
+                imageSrc:
+                    "https://static.toss.im/assets/homepage/safety/icn-instagram.svg",
+                alt: "Toss Instagram",
+            },
+        ];
+    }
+
     connectedCallback() {
         this.innerHTML = `
-      <footer class="footer-container">
-        <div class="footer-inner">
-          <section class="footer-career">
-            <div class="footer-career-content">
-                <img src='${alphaImage}' alt="alpha">
-                <div class="footer-career-text">
-                    <h3 class="footer-career-title">토스팀이 만드는 수많은 혁신의 순간들</h3>
-                    <p>당신과 함께 만들고 싶습니다.</p>
-                    <p>지금,토스팀에 합류하세요.</p>
-                    <button>채용 중인 공고 보기</button>
+          <footer class="footer">
+              <section class="footer__career">
+                <div class="career__content">
+                    <img src='${alphaImage}' alt="alpha">
+                    <div class="footer__career__text">
+                        <h3>토스팀이 만드는 수많은 혁신의 순간들</h3>
+                        <p>당신과 함께 만들고 싶습니다.</p>
+                        <p>지금,토스팀에 합류하세요.</p>
+                        <button>채용 중인 공고 보기</button>
+                    </div>
                 </div>
-            </div>
-          </section>
-          
-          <article class="footer-site-group-inner">
-              <section class="footer-site-group-list">
-                    <div class="footer-site-group">
-                      <strong class="footer-site-group-title">토스테크</strong>
-                      <ul class="footer-site-group-item">
-                        <li><a href="mailto:techblog@toss.im">의견 보내기</a></li>
-                      </ul>
-                    </div>
-                    
-                    <div class="footer-site-group">
-                      <strong class="footer-site-group-title">토스</strong>
-                      <ul class="footer-site-group-item">
-                        <li><a href="https://toss.im">홈페이지</a></li>
-                        <li><a href="https://team.toss.im">회사 소개</a></li>
-                        <li><a href="https://toss.im/career">채용</a></li>
-                      </ul>
-                    </div>
-                    
-                    <div class="footer-site-group">
-                      <strong class="footer-site-group-title">고객센터</strong>
-                      <ul class="footer-site-group-item">
-                        <li><a href="tel:1599-4905">전화: 1599-4905 (24시간 연중무휴)</a></li>
-                        <li><a href="mailto:support.toss.im">이메일: support@toss.im</a></li>
-                        <li><a href="https://goto.kakao.com/@toss">카카오톡: @toss</a></li>
-                      </ul>
-                    </div>
               </section>
               
-              <address class="footer-address">
-                <strong class="footer-address-company-name">㈜비바리퍼블리카</strong>
-                <small class="footer-copyright">Copyright © Viva Republica, Inc. All Rights Reserved.</small>
-              </address>
-              
-              <ul class="footer-social-list"></ul>
-          </article>
-        </div>
-      </footer>
+              <article class="footer__site-group">
+                  <section class="site-group__list">
+                    ${this._createSiteGroup('토스테크', this.SiteGroupLinks.tech).outerHTML}
+                    ${this._createSiteGroup('토스', this.SiteGroupLinks.toss).outerHTML}
+                    ${this._createSiteGroup('고객센터', this.SiteGroupLinks.customer).outerHTML}
+                  </section>
+                  
+                  <address class="footer__address">
+                    <strong class="address__company-name">㈜비바리퍼블리카</strong>
+                    <small class="adress__copyright">Copyright © Viva Republica, Inc. All Rights Reserved.</small>
+                  </address>
+                  
+                  <ul class="footer-social-list">${this._createSocialList()}</ul>
+              </article>
+          </footer>
       `;
+    }
 
-        class SocialItem {
-            constructor() {
-                this.element = document.querySelector('.footer-social-list');
-            }
+    _createSiteGroup(title,links) {
+        const siteGroup = document.createElement('div');
+        siteGroup.classList.add('site-group__list__item');
 
-            createItem(link, imageSrc, alt) {
-                const li = document.createElement('li');
-                li.classList.add('footer-social-item');
+        const siteTitle = document.createElement('strong');
+        siteTitle.classList.add('footer__site-group__title');
+        siteTitle.textContent = title;
 
-                const a = document.createElement('a');
-                a.link = link;
-                a.target = '_blank';
+        const siteList = document.createElement('ul');
+        siteList.classList.add('footer__site-group__item');
 
-                const img = document.createElement('img');
-                img.src = imageSrc;
-                img.alt = alt;
+        links.forEach(link => {
+            const siteLink = document.createElement('li');
+            const linkTag = document.createElement('a');
+            linkTag.href = link.url;
+            linkTag.textContent = link.text;
 
-                a.appendChild(img);
-                li.appendChild(a);
+            siteLink.appendChild(linkTag);
+            siteList.appendChild(siteLink);
+        })
 
-                this.element.appendChild(li);
-            }
-        }
+        siteGroup.appendChild(siteTitle);
+        siteGroup.appendChild(siteList);
 
-        const footerSocialList = new SocialItem();
-        footerSocialList.createItem('https://www.facebook.com/toss.revolution', 'https://static.toss.im/assets/homepage/safety/icn-facebook.svg', 'Toss Facebook');
-        footerSocialList.createItem('https://blog.toss.im', 'https://static.toss.im/assets/homepage/safety/icn-blog.svg', 'Toss blog');
-        footerSocialList.createItem('https://post.naver.com/tossblog', 'https://static.toss.im/assets/homepage/safety/icn-naver.svg', 'Toss Naver');
-        footerSocialList.createItem('https://twitter.com/toss__official', 'https://static.toss.im/assets/homepage/safety/icn-twitter.svg', 'Toss Twitter');
-        footerSocialList.createItem('https://www.instagram.com/toss.im', 'https://static.toss.im/assets/homepage/safety/icn-instagram.svg', 'Toss Instagram');
+        return siteGroup;
+    }
+
+    _createSocialList() {
+        return this.socialData.map((item) => {
+            return `<li class="footer-social-item">
+                <a href="${item.link}">
+                    <img src="${item.imageSrc}" alt="${item.alt}">
+                </a>
+             </li>`;
+        }).join('');
     }
 }
 
