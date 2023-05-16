@@ -3,8 +3,7 @@ export default class AbstractView {
     document.title = title;
   }
 
-  async setup() {
-  }
+  async setup() {}
 
   template() {
     return "";
@@ -12,7 +11,7 @@ export default class AbstractView {
 
   async render(target) {
     if (target) {
-      target.innerHTML = await this.template();
+      target.innerHTML = `${this.template()}`;
     }
   }
 }
