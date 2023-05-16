@@ -73,8 +73,8 @@ export default class extends AbstractView {
 
     async render(target) {
         const techArticleList = await this.setup();
-        const main = document.createElement('main');
-        main.innerHTML = `${this.template(techArticleList)}`;
-        target.appendChild(main);
+        if (target) {
+            target.innerHTML = `${this.template(techArticleList)}`;
+        }
     }
 }
