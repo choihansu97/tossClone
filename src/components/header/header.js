@@ -4,15 +4,15 @@ class Header extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `          
           <header class="header-container">
-            <div class="container-inner">
-                <div class="logo-wrapper">
+            <div class="header-container__inner">
+                <div class="header-container__logo">
                   <a href="/tech">
                     <img src='${headerImage}' alt="토스 로고">
                   </a>
                 </div>
                 
-                 <div class="mobile-nav-button">
-                    <button class="mobile-nav-dropdown-toggle">
+                 <div class="header-container__mobile-nav-button">
+                    <button class="header-container__mobile-nav-dropdown-toggle">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="line-icon icon-on">
                             <path fill="#B0B8C1" d="M4.118 6.2h16a1.2 1.2 0 100-2.4h-16a1.2 1.2 0 100 2.4m16 4.6h-16a1.2 1.2 0 100 2.4h16a1.2 1.2 0 100-2.4m0 7h-16a1.2 1.2 0 100 2.4h16a1.2 1.2 0 100-2.4" fill-rule="evenodd"></path>
                         </svg>
@@ -23,11 +23,11 @@ class Header extends HTMLElement {
                     </button>
                 </div>
                     
-                <nav class="header-position-wrapper">                
-                   <ul class="position-list">
-                      <li class="content-position"><a href="/design">디자인</a></li>
-                      <li class="content-position"><a href="/tech">개발</a></li>
-                      <li class="content-position"><button>채용 바로가기</button></li>
+                <nav class="header-container__position">                
+                   <ul class="header-container__position-list">
+                      <li class="header-container__position-list__content"><a href="/design">디자인</a></li>
+                      <li class="header-container__position-list__content"><a href="/tech">개발</a></li>
+                      <li class="header-container__position-list__content"><button>채용 바로가기</button></li>
                     </ul>
                 </nav>
             </div>
@@ -38,14 +38,14 @@ class Header extends HTMLElement {
 
     window.addEventListener("scroll", () => {
       if (window.pageYOffset > 0) {
-        headerPosition.classList.add("header-container-fixed");
+        headerPosition.classList.add("header-container__fixed");
       } else {
-        headerPosition.classList.remove("header-container-fixed");
+        headerPosition.classList.remove("header-container__fixed");
       }
     });
 
-    const menuToggleButton = this.querySelector(".mobile-nav-button");
-    const menuContentList = this.querySelector(".header-position-wrapper");
+    const menuToggleButton = this.querySelector(".header-container__mobile-nav-button");
+    const menuContentList = this.querySelector(".header-container__position");
     const iconOn = this.querySelector('.icon-on');
     const iconClose = this.querySelector('.icon-close');
 
