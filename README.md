@@ -24,8 +24,6 @@
 
 ## 🏁 프로젝트 실행방법 <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
-
 ### CLI
 
 ```
@@ -35,6 +33,11 @@ npm run start
 ```
 
 End with an example of getting some data out of the system or using it for a little demo.
+
+## 화면구성📺
+![작업내용](https://github.com/choihansu97/tossClone/assets/60763027/57596e52-c90e-4b9a-88ea-d2bf335cf9bf)
+
+
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
