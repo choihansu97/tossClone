@@ -1,33 +1,63 @@
-import HttpClient from "../http";
+import { HttpClient } from "../http";
 import AbstractView from "./abstractView";
-import { DesignDto } from "./dto/designDto";
+import { DesignDto, EditorDto } from "./dto/designDto";
+
+const API_BASE_URL = "http://localhost:3000";
 
 export default class extends AbstractView {
-  url = "http://localhost:3000";
-
   constructor() {
     super();
     this.setTitle("토스 기술 블로그, 토스테크 글 목록");
   }
 
   async setup() {
-    const client = new HttpClient({ baseUrl: this.url });
-    const response = await client.get({ path: "/design/articles" });
-    const designArticleList = response.data.map(article => new DesignDto(article.id, article.thumbnail, article.title, article.content, article.createDate));
-    return designArticleList;
+    const client = new HttpClient({ baseUrl: API_BASE_URL });
+
+    try {
+      const response = await client.get({
+        path: "/api/design/articles",
+      });
+
+      const editorData = response.data.map(
+        (data) =>
+          new EditorDto(
+            data.editor.imageUrl,
+            data.editor.name,
+            data.editor.position,
+            data.editor.content
+          )
+      );
+
+      const designArticleList = response.data.map(
+        (article) =>
+          new DesignDto(
+            article.id,
+            article.category,
+            article.thumbnail,
+            article.title,
+            article.content,
+            article.createDate,
+            editorData
+          )
+      );
+      return designArticleList;
+    } catch(error) {
+      console.error("오류가 발생했습니다:", error);
+      location.href = `${API_BASE_URL}`;
+    }
   }
 
   template(designArticleList) {
     let articleHtml = "";
     for (const article of designArticleList) {
       articleHtml += `
-      <li>
-        <a href="/article/${article.id}">
-          <img src="${article.thumbnail}" alt="${article.title}">
-          <div>
-            <h2>${article.title}</h2>
-            <p>${article.content}</p>
-            <p>${article.createDate}</p>
+      <li class="article-list-item">
+        <a class='article-list-item-target' href="/design/article/${article.id}">
+          <img class='article-image' src="${article.thumbnail}" alt="${article.title}">
+          <div class="article-list-item-detail">
+            <h2 class="article-item-title">${article.title}</h2>
+            <p class="article-item-detail">${article.content}</p>
+            <p class="article-item-date">${article.createDate}</p>
           </div>
         </a>
       </li>
@@ -35,19 +65,21 @@ export default class extends AbstractView {
     }
 
     return `
-    <main>
-      <h1>디자인</h1>
-      <ul>
-        ${articleHtml}
-      </ul>
-    </main>
-  `;
+        <main class="main-article-container">
+          <div class="main-article-wrapper">
+            <h1 class="main-article-header-title">디자인</h1>
+            <ul class="main-article-list">
+              ${articleHtml}
+            </ul>
+          </div>
+        </main>
+      `;
   }
 
   async render(target) {
     const designArticleList = await this.setup();
     if (target) {
-      target.innerHTML = await this.template(designArticleList);
+      target.innerHTML = `${this.template(designArticleList)}`;
     }
   }
 }
