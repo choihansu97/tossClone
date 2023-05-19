@@ -12,67 +12,61 @@ export default class extends AbstractView {
 
   async setup() {
     const client = new HttpClient({ baseUrl: API_BASE_URL });
+    const response = await client.get({
+      path: "/api/design/articles"
+    });
 
-    try {
-      const response = await client.get({
-        path: "/api/design/articles",
-      });
+    const editorData = response.data.map(
+      (data) =>
+        new EditorDto(
+          data.editor.imageUrl,
+          data.editor.name,
+          data.editor.position,
+          data.editor.content
+        )
+    );
 
-      const editorData = response.data.map(
-        (data) =>
-          new EditorDto(
-            data.editor.imageUrl,
-            data.editor.name,
-            data.editor.position,
-            data.editor.content
-          )
-      );
-
-      const designArticleList = response.data.map(
-        (article) =>
-          new DesignDto(
-            article.id,
-            article.category,
-            article.thumbnail,
-            article.title,
-            article.content,
-            article.createDate,
-            editorData
-          )
-      );
-      return designArticleList;
-    } catch(error) {
-      console.error("오류가 발생했습니다:", error);
-      location.href = `${API_BASE_URL}`;
-    }
+    const designArticleList = response.data.map(
+      (article) =>
+        new DesignDto(
+          article.id,
+          article.category,
+          article.thumbnail,
+          article.title,
+          article.content,
+          article.createDate,
+          editorData
+        )
+    );
+    return designArticleList;
   }
 
   template(designArticleList) {
     let articleHtml = "";
     for (const article of designArticleList) {
       articleHtml += `
-      <li class="article-list-item">
-        <a class='article-list-item-target' href="/design/article/${article.id}">
-          <img class='article-image' src="${article.thumbnail}" alt="${article.title}">
-          <div class="article-list-item-detail">
-            <h2 class="article-item-title">${article.title}</h2>
-            <p class="article-item-detail">${article.content}</p>
-            <p class="article-item-date">${article.createDate}</p>
-          </div>
-        </a>
-      </li>
+        <li class="article-list__item">
+          <a class="article-list__link" href="/design/article/${article.id}">
+            <img class="article-list__thumbnail" src="${article.thumbnail}" alt="${article.title}">
+            <div class="article-list-content">
+              <h2 class="article-list-content__title">${article.title}</h2>
+              <p class="article-list-content__text">${article.content}</p>
+              <p class="article-list-content__date">${article.createDate}</p>
+            </div>
+          </a>
+        </li>
     `;
     }
 
     return `
-        <main class="main-article-container">
-          <div class="main-article-wrapper">
-            <h1 class="main-article-header-title">디자인</h1>
-            <ul class="main-article-list">
-              ${articleHtml}
-            </ul>
-          </div>
-        </main>
+      <article class="article-list-container">
+        <div class="article-list-inner">
+          <h1 class="article-list-inner__title">디자인</h1>
+          <ul class="article-list">
+            ${articleHtml}
+          </ul>
+        </div>
+      </article>
       `;
   }
 
