@@ -1,5 +1,5 @@
 @media screen and (max-width: 700px) {
-    .article-view-title {
+    .article-view-inner__title {
         font-size: 3.2rem;
     }
 }
