@@ -10,13 +10,13 @@
     margin: 0 auto;
 }
 
-.article-view-image {
+.article-view__image {
     width: 100%;
     margin-top: 36px;
     border-radius: 12px;
 }
 
-.article-view-title {
+.article-view__title {
     line-height: 1.25;
     margin-top: 20px;
     color: var(--gray800);
@@ -24,42 +24,42 @@
     font-weight: 600;
 }
 
-.article-view-author {
+.article-view__author {
     display: flex;
     align-items: center;
     margin-top: 20px;
 }
 
-.article-view-author-image {
+.article-view__author-image  {
     width: 48px;
     height: 48px;
     margin-right: 14px;
     border-radius: 50%;
 }
 
-.article-view-author-about {
+.article-view__author-about {
     display: flex;
     flex-direction: column;
 }
 
-.article-author-about-profile {
+.article-view__author-profile {
     display: flex;
 }
 
-.article-author-about-name,
-.article-author-about-position {
+.article-view__author-name,
+.article-view__author-position {
     color: var(--gray700);
     font-size: 1.7rem;
     font-weight: 500;
 }
 
-.article-posted-date {
+.article-view__posted-date {
     line-height: 1.5;
     color: var(--gray500);
     font-size: 1.4rem;
 }
 
-.article-view-content {
+.article-view__content {
     line-height: 2;
     margin-top: 54px;
     color: var(--gray800);
@@ -67,7 +67,7 @@
     font-weight: 400;
 }
 
-.article-view-reaction {
+.article-view__reaction {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -79,14 +79,14 @@
     border-radius: 12px;
 }
 
-.article-view-reaction-title {
+.article-view__reaction-title {
     margin: 16px 0;
     color: var(--gray700);
     font-size: 2.4rem;
     font-weight: 600;
 }
 
-.article-view-reaction-sub-title {
+.article-view__reaction-sub-title {
     line-height: 1.5;
     margin-bottom: 4px;
     color: var(--gray600);
@@ -94,29 +94,22 @@
     font-weight: 500;
 }
 
-.article-view-reaction-choice {
+.article-view__reaction-choice {
     display: flex;
     margin-top: 16px;
 }
 
-.article-view-reaction-choice a {
+.article-view__reaction-choice a {
     font-size: 4.5rem;
 }
 
-.article-reaction-happy, .article-reaction-not-bad {
+.article-view__reaction-happy, .article-view__reaction-not-bad {
     margin: 0 12px;
     transition: all 0.15s ease-in-out 0s;
     cursor: pointer;
 }
 
-/*.article-reaction-happy:hover {*/
-/*  content: '';*/
-/*  display: block;*/
-/*  position: absolute;*/
-/*  transform: scale(1.2);*/
-/*}*/
-
-.article-view-link {
+.article-view__link {
     display: flex;
     justify-content: center;
     align-items: center;
