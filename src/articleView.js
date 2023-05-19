@@ -50,35 +50,35 @@ export default class extends AbstractView {
   template(articleView) {
     let articleHtml = `
       <article class="article-view-inner">
-          <img class= "article-view__image" src="${articleView.thumbnail}" alt="${articleView.title}">
+          <img class= "article-view-inner__image" src="${articleView.thumbnail}" alt="${articleView.title}">
 
-          <h2 class="article-view__title">${articleView.title}</h2>
+          <h2 class="article-view-inner__title">${articleView.title}</h2>
           
-          <div class="article-view__author">
-            <img class="article-view__author-image" src="${articleView.editor.imageUrl}" alt="${articleView.title}">
+          <div class="article-author">
+            <img class="article-author-image" src="${articleView.editor.imageUrl}" alt="${articleView.title}">
             
-            <section class="article-view__author-about">
-              <div class="article-view__author-profile">
-                <span class="article-view__author-name">${articleView.editor.name}</span>
-                <span class="article-view__author-position">ㆍ${articleView.editor.position}</span>
+            <section class="article-view-inner__author-about">
+              <div class="author-profile">
+                <span class="author-profile__name">${articleView.editor.name}</span>
+                <span class="author-profile__position">ㆍ${articleView.editor.position}</span>
               </div>
               
-              <div class="article-view__posted-date">${articleView.createDate}</div>
+              <div class="article-view-inner__posted-date">${articleView.createDate}</div>
             </section>
           </div>
           
-          <p class="article-view__content">${articleView.editor.content}</p>
+          <p class="article-view-inner__content">${articleView.editor.content}</p>
           
-          <section class="article-view__reaction">
-            <h2 class="article-view__reaction-title">재미있게 읽으셨나요?</h2>
-            <p class="article-view__reaction-sub-title">좋았는지, 아쉬웠는지, 아래 이모지를 눌러 의견을 들려주세요.</p>
+          <section class="article-view-inner__reaction">
+            <h2 class="article-view-inner__reaction__title">재미있게 읽으셨나요?</h2>
+            <p class="article-view-inner__reaction__sub-title">좋았는지, 아쉬웠는지, 아래 이모지를 눌러 의견을 들려주세요.</p>
             
             <div class="article-view__reaction-choice">
                 <div class="article-view__reaction-happy"><a href="#">😍</a></div>
                 <div class="article-view__reaction-not-bad"><a href="#">🤔</a></div>
             </div>
             
-            <button class="article-view__link">아티클 공유하기</button>
+            <button class="article-view__reaction__link">아티클 공유하기</button>
           </section>
       </article>
     `;

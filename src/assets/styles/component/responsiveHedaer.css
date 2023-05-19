@@ -59,32 +59,32 @@
 
 /*main*/
 @media screen and (max-width: 700px) {
-  .main-article-container {
+  .article-list-container {
     margin-bottom: 64px;
   }
 
-  .main-article-header-title {
+  .article-list-inner__title {
     margin: 18px 0;
     font-size: 2.8rem;
   }
 
-  .article-list-item-target {
+  .article-list__link {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .article-image {
+  .article-list__thumbnail {
     width: 100%;
     max-height: 200px;
     margin: 0 0 20px 0;
   }
 
-  .article-item-title {
+  .article-list-content__title {
     margin-bottom: 10px;
     font-size: 2.6rem;
   }
 
-  .article-item-detail {
+  .article-list-content__text {
     margin-bottom: 16px;
     font-size: 16px;
     line-height: 1.5;
@@ -137,7 +137,7 @@
 
 /* articleView */
 @media screen and (max-width: 700px) {
-  .article-view__title {
+  .article-view-inner__title {
     font-size: 3.2rem;
   }
 }

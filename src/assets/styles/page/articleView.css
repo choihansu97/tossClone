@@ -10,13 +10,13 @@
     margin: 0 auto;
 }
 
-.article-view__image {
+.article-view-inner__image {
     width: 100%;
     margin-top: 36px;
     border-radius: 12px;
 }
 
-.article-view__title {
+.article-view-inner__title {
     line-height: 1.25;
     margin-top: 20px;
     color: var(--gray800);
@@ -24,42 +24,42 @@
     font-weight: 600;
 }
 
-.article-view__author {
+.article-author {
     display: flex;
     align-items: center;
     margin-top: 20px;
 }
 
-.article-view__author-image  {
+.article-author-image  {
     width: 48px;
     height: 48px;
     margin-right: 14px;
     border-radius: 50%;
 }
 
-.article-view__author-about {
+.article-view-inner__author-about {
     display: flex;
     flex-direction: column;
 }
 
-.article-view__author-profile {
+.author-profile {
     display: flex;
 }
 
-.article-view__author-name,
-.article-view__author-position {
+.author-profile__name,
+.author-profile__position {
     color: var(--gray700);
     font-size: 1.7rem;
     font-weight: 500;
 }
 
-.article-view__posted-date {
+.article-view-inner__posted-date {
     line-height: 1.5;
     color: var(--gray500);
     font-size: 1.4rem;
 }
 
-.article-view__content {
+.article-view-inner__content {
     line-height: 2;
     margin-top: 54px;
     color: var(--gray800);
@@ -67,7 +67,7 @@
     font-weight: 400;
 }
 
-.article-view__reaction {
+.article-view-inner__reaction {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -79,14 +79,14 @@
     border-radius: 12px;
 }
 
-.article-view__reaction-title {
+.article-view-inner__reaction__title {
     margin: 16px 0;
     color: var(--gray700);
     font-size: 2.4rem;
     font-weight: 600;
 }
 
-.article-view__reaction-sub-title {
+.article-view-inner__reaction__sub-title {
     line-height: 1.5;
     margin-bottom: 4px;
     color: var(--gray600);
@@ -99,7 +99,7 @@
     margin-top: 16px;
 }
 
-.article-view__reaction-choice a {
+.article-view__reaction-happy a {
     font-size: 4.5rem;
 }
 
@@ -109,7 +109,7 @@
     cursor: pointer;
 }
 
-.article-view__link {
+.article-view__reaction__link {
     display: flex;
     justify-content: center;
     align-items: center;
