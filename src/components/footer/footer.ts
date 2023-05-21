@@ -1,6 +1,31 @@
 import alphaImage from "../../assets/images/alpha.png";
 
+interface SiteLink {
+    [key : string] : string
+}
+
+interface SocialData {
+    [key : string] : string
+}
+
 class Footer extends HTMLElement {
+
+    private SiteGroupLinks: Record<string, SiteLink[]> = {
+        tech: [
+            { url: 'mailto:techblog@toss.im', text: '의견 보내기' }
+        ],
+        toss: [
+            { url: 'https://toss.im', text: '홈페이지' },
+            { url: 'https://team.toss.im', text: '회사 소개' },
+            { url: 'https://toss.im/career', text: '채용' }
+        ],
+        customer: [
+            { url: 'tel:1599-4905', text: '전화: 1599-4905 (24시간 연중무휴)' },
+            { url: 'mailto:support.toss.im', text: '이메일: support@toss.im' },
+            { url: 'https://goto.kakao.com/@toss', text: '카카오톡: @toss' }
+        ]
+    }
+
     constructor() {
         super();
         this.SiteGroupLinks = {
@@ -84,7 +109,7 @@ class Footer extends HTMLElement {
       `;
     }
 
-    _createSiteGroup(title,links) {
+    _createSiteGroup(title: string,links: string) {
         const siteGroup = document.createElement('div');
         siteGroup.classList.add('site-group__list__item');
 
