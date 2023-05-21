@@ -4,7 +4,7 @@
   "description": "f-lab",
   "main": "src/index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "webpack && node server.js",
     "build": "webpack",
     "lint": "lint-staged",
     "test": "echo \"Error: no test specified\" && exit 1"
