@@ -14,7 +14,11 @@ export default class AbstractView {
 
     const main = document.createElement('main');
     main.innerHTML = this.template(setupData);
-    target.innerHTML = '';
-    target.appendChild(main);
+
+    if (target.firstChild) {
+      target.replaceChild(main, target.firstChild);
+    } else {
+      target.appendChild(main);
+    }
   }
 }
