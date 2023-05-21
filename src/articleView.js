@@ -2,8 +2,6 @@ import { HttpClient } from "../http";
 import AbstractView from "./abstractView";
 import { ArticleDto, EditorDto } from "./dto/articleDto";
 
-const API_BASE_URL = "http://localhost:3000";
-
 export default class extends AbstractView {
   constructor(id, category) {
     super();
@@ -13,7 +11,7 @@ export default class extends AbstractView {
 
   async setup() {
     window.scrollTo(0, 0);
-    const client = new HttpClient({ baseUrl: API_BASE_URL });
+    const client = new HttpClient();
 
     try {
       const response = await client.get({
@@ -22,20 +20,20 @@ export default class extends AbstractView {
       });
 
       const editor = new EditorDto(
-        response.data.editor.imageUrl,
-        response.data.editor.name,
-        response.data.editor.position,
-        response.data.editor.content
+          response.data.editor.imageUrl,
+          response.data.editor.name,
+          response.data.editor.position,
+          response.data.editor.content
       );
 
       const articleView = new ArticleDto(
-        response.data.id,
-        response.data.category,
-        response.data.thumbnail,
-        response.data.title,
-        response.data.content,
-        response.data.createDate,
-        editor
+          response.data.id,
+          response.data.category,
+          response.data.thumbnail,
+          response.data.title,
+          response.data.content,
+          response.data.createDate,
+          editor
       );
       articleView.validate();
 
@@ -43,7 +41,6 @@ export default class extends AbstractView {
       return articleView;
     } catch (error) {
       console.log(error);
-      location.href = `${API_BASE_URL}/404`;
     }
   }
 
@@ -89,11 +86,4 @@ export default class extends AbstractView {
             </article>
       `;
   }
-
-    async render(target) {
-      const articleView = await this.setup();
-      if (target) {
-          target.innerHTML = `${this.template(articleView)}`;
-      }
-    }
 }

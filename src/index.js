@@ -27,10 +27,10 @@ const components = {
 };
 
 router
-.addRoute("/", components.tech)
-.addRoute("/tech", components.tech)
-.addRoute("/design", components.design)
-.addRoute("/tech/article/:id", components.techArticle)
-.addRoute("/design/article/:id", components.designArticle)
-.setNotFound(components.notFoundComponent)
-.start();
+    .addRoute("/", components.tech)
+    .addRoute("/tech", components.tech)
+    .addRoute("/design", components.design)
+    .addRoute("/tech/article/:id", components.techArticle)
+    .addRoute("/design/article/:id", components.designArticle)
+    .setNotFound(components.notFoundComponent)
+    .start();

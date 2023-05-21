@@ -2,8 +2,6 @@ import { HttpClient } from "../http";
 import AbstractView from "./abstractView";
 import { DesignDto, EditorDto } from "./dto/designDto";
 
-const API_BASE_URL = "http://localhost:3000";
-
 export default class extends AbstractView {
   constructor() {
     super();
@@ -11,32 +9,32 @@ export default class extends AbstractView {
   }
 
   async setup() {
-    const client = new HttpClient({ baseUrl: API_BASE_URL });
+    const client = new HttpClient();
     const response = await client.get({
       path: "/api/design/articles"
     });
 
     const editorData = response.data.map(
-      (data) =>
-        new EditorDto(
-          data.editor.imageUrl,
-          data.editor.name,
-          data.editor.position,
-          data.editor.content
-        )
+        (data) =>
+            new EditorDto(
+                data.editor.imageUrl,
+                data.editor.name,
+                data.editor.position,
+                data.editor.content
+            )
     );
 
     const designArticleList = response.data.map(
-      (article) =>
-        new DesignDto(
-          article.id,
-          article.category,
-          article.thumbnail,
-          article.title,
-          article.content,
-          article.createDate,
-          editorData
-        )
+        (article) =>
+            new DesignDto(
+                article.id,
+                article.category,
+                article.thumbnail,
+                article.title,
+                article.content,
+                article.createDate,
+                editorData
+            )
     );
     return designArticleList;
   }
@@ -68,12 +66,5 @@ export default class extends AbstractView {
         </div>
       </article>
       `;
-  }
-
-  async render(target) {
-    const designArticleList = await this.setup();
-    if (target) {
-      target.innerHTML = `${this.template(designArticleList)}`;
-    }
   }
 }
