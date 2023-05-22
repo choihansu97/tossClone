@@ -1,25 +1,29 @@
 export default class AbstractView {
-    protected setTitle(title: string) {
-        document.title = title;
+  setTitle(title: string) {
+    document.title = title;
+  }
+
+  async setup():Promise<any> {
+  }
+
+  template(setup : any):string{
+    return ''
+  }
+
+  mounted() {}
+
+  async render(target: HTMLElement) {
+    const setupData = await this.setup();
+
+    const main = document.createElement("main");
+    main.innerHTML = this.template(setupData);
+
+    if (target.firstChild) {
+      target.replaceChild(main, target.firstChild);
+    } else {
+      target.appendChild(main);
     }
 
-    protected async setup() {
-    }
-
-    protected template() {
-        return "";
-    }
-
-    protected async render(target: HTMLElement) {
-        const setupData = await this.setup();
-
-        const main = document.createElement('main');
-        main.innerHTML = this.template(setupData);
-
-        if (target.firstChild) {
-            target.replaceChild(main, target.firstChild);
-        } else {
-            target.appendChild(main);
-        }
-    }
+    this.mounted();
+  }
 }

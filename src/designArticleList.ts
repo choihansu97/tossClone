@@ -1,8 +1,8 @@
-import { HttpClient } from "../http";
+import { HttpClient } from "../http.js";
 import AbstractView from "./abstractView";
 import { DesignDto, EditorDto } from "./dto/designDto";
 
-export default class extends AbstractView {
+export default class DesignArticleList extends AbstractView {
   constructor() {
     super();
     this.setTitle("토스 기술 블로그, 토스테크 글 목록");
