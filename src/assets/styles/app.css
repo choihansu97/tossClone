@@ -1,0 +1,14 @@
+@import "./component/header.css";
+@import "./component/footer.css";
+
+@import "./page/articleList.css";
+@import "./page/articleView.css";
+
+@import "./component/responsiveHedaer.css";
+@import "/component/responsiveFooter.css";
+
+@import "./page/responsiveArticleList.css";
+@import "./page/responsiveArticleView.css";
+
+@import "default.css";
+@import "variables.css";

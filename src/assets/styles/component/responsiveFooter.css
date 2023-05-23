@@ -1,0 +1,42 @@
+@media screen and (max-width: 700px) {
+    .career__content {
+        flex-direction: column;
+        align-items: flex-start;
+        row-gap: 24px;
+    }
+
+    .career__content > img {
+        width: 90px;
+    }
+
+    .footer__career__text > h3 {
+        font-size: 2rem;
+    }
+
+    .footer__career__text > p {
+        font-size: 1.6rem;
+    }
+
+    .footer__career__text > button {
+        width: 128px;
+        height: 32px;
+        font-size: 1.4rem;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .footer__site-group {
+        margin-top: 0;
+        padding: 60px 40px 80px;
+    }
+
+    .site-group__list {
+        padding: 0;
+        flex-direction: column;
+    }
+
+    .site-group__list__item {
+        width: 100%;
+        padding-bottom: 40px;
+    }
+}
