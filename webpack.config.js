@@ -7,8 +7,8 @@ const path = require("path");
 module.exports = {
     mode: "development",
     entry: {
-        index: path.resolve(__dirname, "src", "index.js"),
         msw: path.resolve(__dirname, "src", "mocks", "mswServer.js"),
+        index: path.resolve(__dirname, "src", "index.js"),
     },
 
     output: {
@@ -46,5 +46,9 @@ module.exports = {
                 type: 'asset/resource',
             },
         ],
+    },
+
+    experiments: {
+        topLevelAwait: true,
     },
 };
