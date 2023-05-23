@@ -6,7 +6,7 @@ export default class extends AbstractView {
         document.title = '404: This page could not be found';
     }
 
-    template() {
+    template():string {
         let articleHtml = `
             <h1 class="not-found-title">404</h1>
             <div class="not-found-description">This page could not be found</div>
@@ -16,11 +16,5 @@ export default class extends AbstractView {
             <main class="not-found-page">
               ${articleHtml}
             </main>`;
-    }
-
-    async render(target) {
-        if (target) {
-            target.innerHTML = `${this.template()}`;
-        }
     }
 }

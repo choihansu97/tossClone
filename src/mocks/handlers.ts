@@ -13,12 +13,19 @@ export const handlers = [
   rest.get("/api/tech/articles/:id", (req, res, ctx) => {
     const { id } = req.params;
     const filteredArticleParams = techArticles.find((article) => article.id == id);
-    return res(ctx.status(200), ctx.json(filteredArticleParams));
+
+    if(filteredArticleParams) {
+      return res(ctx.status(200), ctx.json(filteredArticleParams));
+    }
   }),
 
   rest.get("/api/design/articles/:id", (req, res, ctx) => {
     const { id } = req.params;
     const filteredArticleParams = designArticles.find((article) => article.id == id);
-    return res(ctx.status(200), ctx.json(filteredArticleParams));
+
+    if(filteredArticleParams) {
+      return res(ctx.status(200), ctx.json(filteredArticleParams));
+    }
+
   }),
 ];

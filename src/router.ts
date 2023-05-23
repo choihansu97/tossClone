@@ -1,4 +1,16 @@
+interface RoutesType {
+
+}
+
+interface NotFoundRoute {
+  fragment : string;
+  component : string[];
+}
+
 export class CreateRouter {
+  routes
+  notFoundRoute
+
   constructor() {
     this.routes = [];
     this.notFoundRoute = null;

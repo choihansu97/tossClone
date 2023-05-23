@@ -1,8 +1,8 @@
 import headerImage from "../../assets/images/tossLogo.png";
 
 class Header extends HTMLElement {
-  connectedCallback() {
-    this.innerHTML = `          
+    connectedCallback(): void {
+        this.innerHTML = `          
           <header class="header-container">
             <div class="header-container__inner">
                 <div class="header-container__logo">
@@ -34,40 +34,40 @@ class Header extends HTMLElement {
           </header>
         `;
 
-    const headerPosition = this.querySelector(".header-container");
+        const headerPosition = this.querySelector(".header-container") as HTMLElement;
 
-    window.addEventListener("scroll", () => {
-      if (window.pageYOffset > 0) {
-        headerPosition.classList.add("header-container__fixed");
-      } else {
-        headerPosition.classList.remove("header-container__fixed");
-      }
-    });
+        window.addEventListener("scroll", () => {
+            if (window.pageYOffset > 0) {
+                headerPosition?.classList.add("header-container__fixed");
+            } else {
+                headerPosition?.classList.remove("header-container__fixed");
+            }
+        });
 
-    const menuToggleButton = this.querySelector(".header-container__mobile-nav-button");
-    const menuContentList = this.querySelector(".header-container__position");
-    const iconOn = this.querySelector('.icon-on');
-    const iconClose = this.querySelector('.icon-close');
+        const menuToggleButton = this.querySelector(".header-container__mobile-nav-button") as HTMLElement;
+        const menuContentList = this.querySelector(".header-container__position") as HTMLElement;
+        const iconOn = this.querySelector('.icon-on') as HTMLElement;
+        const iconClose = this.querySelector('.icon-close') as HTMLElement;
 
-    const isMenuOpen = localStorage.getItem('isMenuOpen') === 'true';
-    if (isMenuOpen) {
-      menuContentList.classList.add('show-menu-list');
+        const isMenuOpen: boolean = localStorage.getItem('isMenuOpen') === 'true';
+        if (isMenuOpen) {
+            menuContentList.classList.add('show-menu-list');
+        }
+
+        menuToggleButton.addEventListener("click", () => {
+            menuContentList.classList.toggle("show-menu-list");
+
+            if (menuContentList.classList.contains('show-menu-list')) {
+                iconOn.style.display = 'none';
+                iconClose.style.display = 'block'
+            } else {
+                iconOn.style.display = 'block';
+                iconClose.style.display = 'none'
+            }
+
+            (localStorage as Storage).setItem('isMenuOpen', menuContentList.classList.contains('show-menu-list').toString());
+        });
     }
-
-    menuToggleButton.addEventListener("click", () => {
-      menuContentList.classList.toggle("show-menu-list");
-
-      if(menuContentList.classList.contains('show-menu-list')) {
-        iconOn.style.display = 'none';
-        iconClose.style.display = 'block'
-      } else {
-        iconOn.style.display = 'block';
-        iconClose.style.display = 'none'
-      }
-
-      localStorage.setItem('isMenuOpen', menuContentList.classList.contains('show-menu-list'));
-    });
-  }
 }
 
 customElements.define("app-header", Header);

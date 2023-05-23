@@ -7,7 +7,7 @@ const path = require("path");
 module.exports = {
   mode: "development",
   entry: {
-    msw: path.resolve(__dirname, "src", "mocks", "mswServer.js"),
+    msw: path.resolve(__dirname, "src", "mocks", "mswServer.ts"),
     index: path.resolve(__dirname, "src", "index.ts"),
   },
 

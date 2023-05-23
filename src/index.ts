@@ -1,4 +1,4 @@
-import {CreateRouter} from "./router.js";
+import {CreateRouter} from "./router";
 import "./assets/styles/app.css";
 import "./components/header/header";
 import "./components/footer/footer";
@@ -10,7 +10,7 @@ import notFoundPage from './pages/notFoundPage';
 
 const router = new CreateRouter();
 
-const app:HTMLElement = document.querySelector("#app");
+const app = document.querySelector("#app") as HTMLElement;
 
 if (app) {
     const header = document.createElement("app-header");
@@ -21,10 +21,10 @@ if (app) {
 }
 
 const components = {
-    tech: () => new tech().render(app),
-    design: () => new design().render(app),
-    techArticle: (id) => new articleView(id, 'tech').render(app),
-    designArticle: (id) => new articleView(id, 'design').render(app),
+    tech: () => new techArticleList().render(app),
+    design: () => new DesignArticleList().render(app),
+    techArticle: (id) => new ArticleView(id, 'tech').render(app),
+    designArticle: (id) => new ArticleView(id, 'design').render(app),
     notFoundComponent: () => (new notFoundPage().render(app)),
 };
 

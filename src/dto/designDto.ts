@@ -8,7 +8,7 @@ type EditorType = {
 type ArticleListType = {
   id: number | string;
   category: string;
-  thumbnail : string
+  thumbnail: string
   title: string;
   content: string;
   createDate: string;
@@ -55,7 +55,7 @@ export class DesignDto {
     this.title = title;
     this.content = content;
     this.createDate = createDate;
-    this.editor = editor;
+    this.editor = new EditorDto(editor);
 
     this.validate();
   }
