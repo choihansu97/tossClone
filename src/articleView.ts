@@ -1,6 +1,7 @@
 import { HttpClient } from "../http.js";
 import AbstractView from "./abstractView";
 import { ArticleDto, EditorDto } from "./dto/articleDto";
+import * as articleUtils from "./articleUtils";
 
 export default class ArticleView extends AbstractView {
   id: string | number;
@@ -12,30 +13,31 @@ export default class ArticleView extends AbstractView {
     this.category = category;
   }
 
-  async setup(): Promise<{ articleView }> {
+  async setup(): Promise<{ articleView } | > {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     const client = new HttpClient();
 
     const response = await client.get({
       path: `/api/${this.category}/articles/:id`,
       requestParams: this.id
+    }) as articleUtils.RequestData;
+
+    const editor = new EditorDto({
+      imageUrl: response.data.editor.imageUrl,
+      editorName: response.data.editor.name,
+      position: response.data.editor.position,
+      content: response.data.editor.content
     });
 
-    const editor = new EditorDto(
-      response.data.editor.imageUrl,
-      response.data.editor.name,
-      response.data.editor.position,
-      response.data.editor.content
-    );
-
-    const articleView = new ArticleDto(
-      response.data.id,
-      response.data.category,
-      response.data.thumbnail,
-      response.data.title,
-      response.data.content,
-      response.data.createDate,
-      editor
+    const articleView = new ArticleDto({
+        id: response.data.id,
+        category: response.data.category,
+        thumbnail: response.data.thumbnail,
+        title: response.data.title,
+        content: response.data.content,
+        createDate: response.data.createDate,
+        editor: editor
+      }
     );
     articleView.validate();
 
@@ -43,7 +45,9 @@ export default class ArticleView extends AbstractView {
     return articleView;
   }
 
-  template() {
+  template(): string {
+    const articleView: ArticleDto = this.setup();
+
     let articleHtml = `
       <article class="article-view-inner">
           <img class= "article-view-inner__image" src="${articleView.thumbnail}" alt="${articleView.title}">
@@ -55,7 +59,7 @@ export default class ArticleView extends AbstractView {
             
             <section class="article-view-inner__author-about">
               <div class="author-profile">
-                <span class="author-profile__name">${articleView.editor.name}</span>
+                <span class="author-profile__name">${articleView.editor.editorName}</span>
                 <span class="author-profile__position">ㆍ${articleView.editor.position}</span>
               </div>
               

@@ -2,7 +2,8 @@
   "compilerOptions": {
     "target": "ES5",
     "strict": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true
   },
   "include": [
     "src/**/*.ts"

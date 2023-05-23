@@ -45,7 +45,7 @@ export class DesignDto {
   title: string;
   content: string;
   createDate: string;
-  editor: EditorType;
+  editor: EditorDto[];
 
   constructor(designDto: ArticleListType) {
     const { id, category, thumbnail, title, content, createDate, editor } = designDto;
@@ -55,12 +55,12 @@ export class DesignDto {
     this.title = title;
     this.content = content;
     this.createDate = createDate;
-    this.editor = new EditorDto(editor);
+    this.editor = [new EditorDto(editor)];
 
     this.validate();
   }
 
-  validate() {
-    this.editor.forEach(editor => editor.validate());
+  validate(): void {
+    this.editor.forEach((editor: EditorDto) => editor.validate() as void);
   }
 }

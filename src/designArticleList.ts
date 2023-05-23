@@ -1,6 +1,7 @@
 import { HttpClient } from "../http.js";
 import AbstractView from "./abstractView";
 import { DesignDto, EditorDto } from "./dto/designDto";
+import * as articleUtils from "./articleUtils";
 
 export default class DesignArticleList extends AbstractView {
   constructor() {
@@ -10,36 +11,32 @@ export default class DesignArticleList extends AbstractView {
 
   async setup() {
     const client = new HttpClient();
-    const response = await client.get({
-      path: "/api/design/articles"
-    });
+    const response = await client.get({path: "/api/design/articles"}) as articleUtils.RequestData ;
 
-    const editorData = response.data.map(
-        (data) =>
-            new EditorDto(
-                data.editor.imageUrl,
-                data.editor.name,
-                data.editor.position,
-                data.editor.content
-            )
+    const editorData = response.data.map((data: articleUtils.ResponseEditorData) =>
+      new EditorDto({
+        imageUrl: data.imageUrl,
+        editorName: data.name,
+        position: data.position,
+        content: data.content
+      })
     );
 
-    const designArticleList = response.data.map(
-        (article) =>
-            new DesignDto(
-                article.id,
-                article.category,
-                article.thumbnail,
-                article.title,
-                article.content,
-                article.createDate,
-                editorData
-            )
+    const designArticleList = response.data.map((article: articleUtils.ResponseArticleList) =>
+      new DesignDto({
+        id: article.id,
+        category: article.category,
+        thumbnail: article.thumbnail,
+        title: article.title,
+        content: article.content,
+        createDate: article.createDate,
+        editor: editorData
+      })
     );
     return designArticleList;
   }
 
-  template(designArticleList) {
+  template(designArticleList: DesignDto[]): string {
     let articleHtml = "";
     for (const article of designArticleList) {
       articleHtml += `

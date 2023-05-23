@@ -1,6 +1,7 @@
 import { HttpClient } from "../http.js";
 import AbstractView from "./abstractView";
 import { TechDto, EditorDto } from "./dto/techDto";
+import * as articleUtils from "./articleUtils";
 
 export default class TechArticleList extends AbstractView {
   constructor() {
@@ -8,37 +9,36 @@ export default class TechArticleList extends AbstractView {
     this.setTitle("토스 기술 블로그, 토스테크 글 목록");
   }
 
-  async setup(): Promise<TechArticleList> {
+  async setup(): Promise<TechDto[]> {
     const client = new HttpClient();
-    const response = await client.get({ path: "/api/tech/articles" });
+    const response = await client.get({ path: "/api/tech/articles" }) as articleUtils.RequestData;
 
-    const editorData = response.data.map(
-      (data) =>
-        new EditorDto(
-          data.editor.imageUrl,
-          data.editor.name,
-          data.editor.position,
-          data.editor.content
-        )
+    const editorData = response.data.editor.map((data: articleUtils.ResponseEditorData) =>
+      new EditorDto({
+        imageUrl: data.imageUrl,
+        editorName: data.name,
+        position: data.position,
+        content: data.content
+      })
     );
 
-    const techArticleList = response.data.map(
-      (article) =>
-        new TechDto(
-          article.id,
-          article.category,
-          article.thumbnail,
-          article.title,
-          article.content,
-          article.createDate,
-          editorData
-        )
+    const techArticleList = response.data.map((article: articleUtils.ResponseArticleList) =>
+      new TechDto(
+        {
+          id: article.id,
+          category: article.category,
+          thumbnail: article.thumbnail,
+          title: article.title,
+          content: article.content,
+          createDate: article.createDate,
+          editor: editorData
+        })
     );
 
     return techArticleList;
   }
 
-  template(techArticleList) {
+  template(techArticleList: TechDto[]): string {
     let articleHtml = "";
     for (const article of techArticleList) {
       articleHtml += `

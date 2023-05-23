@@ -28,7 +28,8 @@ const components = {
     notFoundComponent: () => (new notFoundPage().render(app)),
 };
 
-router
+if(router instanceof HTMLElement) {
+    router
     .addRoute("/", components.tech)
     .addRoute("/tech", components.tech)
     .addRoute("/design", components.design)
@@ -36,3 +37,4 @@ router
     .addRoute("/design/article/:id", components.designArticle)
     .setNotFound(components.notFoundComponent)
     .start();
+}

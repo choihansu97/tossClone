@@ -1,47 +1,49 @@
 interface RoutesType {
-
+  fragment: string;
+  regex: RegExp;
+  component: HTMLElement;
+  params: string [];
 }
 
 interface NotFoundRoute {
-  fragment : string;
-  component : string[];
+  fragment: null | string;
+  component?: HTMLElement;
 }
 
 export class CreateRouter {
-  routes
-  notFoundRoute
+  routes: RoutesType[];
+  notFoundRoute: NotFoundRoute | null;
 
   constructor() {
     this.routes = [];
     this.notFoundRoute = null;
   }
 
-  addRoute(fragment, component) {
-    const params =
-      fragment.match(/:\w+/g)?.map((param) => param.slice(1)) || [];
-    const regexFragment = fragment.replace(/:\w+/g, "([^\\/]+)");
+  public addRoute(fragment: string, component: HTMLElement): this {
+    const params: string[] = fragment.match(/:\w+/g)?.map((param) => param.slice(1)) || [];
+    const regexFragment: string = fragment.replace(/:\w+/g, "([^\\/]+)");
     const regex = new RegExp(`^${regexFragment}\\/?$`);
     this.routes.push({ fragment, regex, component, params });
     return this;
   }
 
-  setNotFound(component) {
+  public setNotFound(component: HTMLElement): this {
     this.notFoundRoute = { fragment: "*", component };
     return this;
   }
 
-  navigate(pathname) {
-    window.history.pushState(null, null, pathname);
+  private navigate(pathname: string): this {
+    window.history.pushState(null, "", pathname);
     this.checkRoute();
     return this;
   }
 
-  routeParams(currentRoute, pathName) {
+  private routeParams(currentRoute: RoutesType, pathName: string) {
     const matches = pathName.match(currentRoute.regex);
 
     matches.shift();
 
-    const params = {};
+    const params: { [key: string]: string } = {};
     matches.forEach((paramValue, index) => {
       const paramName = currentRoute.params[index];
       params[paramName] = paramValue;
@@ -50,22 +52,21 @@ export class CreateRouter {
     return params;
   }
 
-  checkRoute() {
-    const path = window.location.pathname;
-    let currentRoute = this.routes.find((route) => route.regex.test(path));
-
-    if (!currentRoute) {
-      currentRoute = this.notFoundRoute;
-    }
+  private checkRoute(): void {
+    const path: string = window.location.pathname;
+    let currentRoute = this.routes.find((route) => route.regex.test(path)) || this.notFoundRoute || { fragment: null };
 
     const urlParams = this.routeParams(currentRoute, path);
-    currentRoute.component(urlParams);
+    if (typeof currentRoute.component === "function") {
+      currentRoute.component(urlParams);
+    }
   }
 
-  start() {
-    window.addEventListener("click", (e) => {
-      const target = e.target.closest("a");
-      if (target) {
+  public start(): void {
+    window.addEventListener("click", (e: MouseEvent) => {
+      const target: HTMLAnchorElement | null = (e.target as HTMLAnchorElement).closest("a");
+
+      if (target instanceof HTMLAnchorElement) {
         e.preventDefault();
         this.navigate(target.href);
       }

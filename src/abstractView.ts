@@ -15,7 +15,7 @@ export default class AbstractView {
   async render(target: HTMLElement) {
     const setupData = await this.setup();
 
-    const main = document.createElement("main");
+    const main:HTMLElement = document.createElement("main");
     main.innerHTML = this.template(setupData);
 
     if (target.firstChild) {
