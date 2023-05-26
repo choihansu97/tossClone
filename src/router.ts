@@ -1,13 +1,12 @@
 interface RoutesType {
   fragment: string;
   regex: RegExp;
-  component: HTMLElement;
-  params: string [];
+  component: (params?: { [key: string]: string }) => void;
+  params: string[];
 }
 
-interface NotFoundRoute {
-  fragment: null | string;
-  component?: HTMLElement;
+interface NotFoundRoute extends RoutesType {
+  fragment: string;
 }
 
 export class CreateRouter {
@@ -19,7 +18,7 @@ export class CreateRouter {
     this.notFoundRoute = null;
   }
 
-  public addRoute(fragment: string, component: HTMLElement): this {
+  public addRoute(fragment: string, component: (params?: { [key: string]: string }) => void): this {
     const params: string[] = fragment.match(/:\w+/g)?.map((param) => param.slice(1)) || [];
     const regexFragment: string = fragment.replace(/:\w+/g, "([^\\/]+)");
     const regex = new RegExp(`^${regexFragment}\\/?$`);
@@ -27,8 +26,8 @@ export class CreateRouter {
     return this;
   }
 
-  public setNotFound(component: HTMLElement): this {
-    this.notFoundRoute = { fragment: "*", component };
+  public setNotFound(component: (params?: { [key: string]: string }) => void): this {
+    this.notFoundRoute = { fragment: "*", regex: /./, component, params: [] };
     return this;
   }
 
@@ -38,26 +37,30 @@ export class CreateRouter {
     return this;
   }
 
-  private routeParams(currentRoute: RoutesType, pathName: string) {
+  private routeParams(currentRoute: RoutesType, pathName: string): { [key: string]: string } | undefined {
     const matches = pathName.match(currentRoute.regex);
 
-    matches.shift();
+    if (matches) {
+      matches.shift();
 
-    const params: { [key: string]: string } = {};
-    matches.forEach((paramValue, index) => {
-      const paramName = currentRoute.params[index];
-      params[paramName] = paramValue;
-    });
+      const params: { [key: string]: string } = {};
+      matches.forEach((paramValue, index) => {
+        const paramName = currentRoute.params[index];
+        params[paramName] = paramValue;
+      });
 
-    return params;
+      return params;
+    }
+
+    return undefined;
   }
 
-  private checkRoute(): void {
+  private checkRoute() {
     const path: string = window.location.pathname;
     let currentRoute = this.routes.find((route) => route.regex.test(path)) || this.notFoundRoute || { fragment: null };
 
     const urlParams = this.routeParams(currentRoute, path);
-    if (typeof currentRoute.component === "function") {
+    if (currentRoute) {
       currentRoute.component(urlParams);
     }
   }

@@ -9,30 +9,31 @@ export default class DesignArticleList extends AbstractView {
     this.setTitle("토스 기술 블로그, 토스테크 글 목록");
   }
 
-  async setup() {
+  async setup(): Promise<DesignDto> {
     const client = new HttpClient();
-    const response = await client.get({path: "/api/design/articles"}) as articleUtils.RequestData ;
+    const response = await client.get({ path: "/api/design/articles" });
 
-    const editorData = response.data.map((data: articleUtils.ResponseEditorData) =>
+    const editorData = response.map((data: articleUtils.ResponseEditorData) =>
       new EditorDto({
         imageUrl: data.imageUrl,
-        editorName: data.name,
+        editorName: data.editorName,
         position: data.position,
         content: data.content
       })
     );
-
-    const designArticleList = response.data.map((article: articleUtils.ResponseArticleList) =>
-      new DesignDto({
-        id: article.id,
-        category: article.category,
-        thumbnail: article.thumbnail,
-        title: article.title,
-        content: article.content,
-        createDate: article.createDate,
-        editor: editorData
-      })
+    const designArticleList = response.map((article: articleUtils.ResponseArticleList) =>
+      new DesignDto(
+        {
+          id: article.id,
+          category: article.category,
+          thumbnail: article.thumbnail,
+          title: article.title,
+          content: article.content,
+          createDate: article.createDate,
+          editor: editorData
+        })
     );
+
     return designArticleList;
   }
 

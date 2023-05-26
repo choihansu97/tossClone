@@ -1,4 +1,4 @@
-import { HttpClient } from "../http.js";
+import { HttpClient } from "../http";
 import AbstractView from "./abstractView";
 import { ArticleDto, EditorDto } from "./dto/articleDto";
 import * as articleUtils from "./articleUtils";
@@ -13,39 +13,38 @@ export default class ArticleView extends AbstractView {
     this.category = category;
   }
 
-  async setup(): Promise<{ articleView } | > {
+  async setup(): Promise<ArticleDto> {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     const client = new HttpClient();
 
-    const response = await client.get({
+    const response: articleUtils.ResponseArticleList = await client.get({
       path: `/api/${this.category}/articles/:id`,
       requestParams: this.id
-    }) as articleUtils.RequestData;
+    });
 
     const editor = new EditorDto({
-      imageUrl: response.data.editor.imageUrl,
-      editorName: response.data.editor.name,
-      position: response.data.editor.position,
-      content: response.data.editor.content
+      imageUrl: response.editorData.imageUrl,
+      editorName: response.editorData.editorName,
+      position: response.editorData.position,
+      content: response.editorData.content
     });
 
     const articleView = new ArticleDto({
-        id: response.data.id,
-        category: response.data.category,
-        thumbnail: response.data.thumbnail,
-        title: response.data.title,
-        content: response.data.content,
-        createDate: response.data.createDate,
-        editor: editor
-      }
-    );
+      id: response.id,
+      category: response.category,
+      thumbnail: response.thumbnail,
+      title: response.title,
+      content: response.content,
+      createDate: response.createDate,
+      editor: editor
+    });
     articleView.validate();
 
     document.title = articleView.title;
     return articleView;
   }
 
-  template(): string {
+  template() {
     const articleView: ArticleDto = this.setup();
 
     let articleHtml = `

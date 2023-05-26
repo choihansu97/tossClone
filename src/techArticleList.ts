@@ -11,18 +11,18 @@ export default class TechArticleList extends AbstractView {
 
   async setup(): Promise<TechDto[]> {
     const client = new HttpClient();
-    const response = await client.get({ path: "/api/tech/articles" }) as articleUtils.RequestData;
+    const response = await client.get({ path: "/api/tech/articles" });
 
-    const editorData = response.data.editor.map((data: articleUtils.ResponseEditorData) =>
+    const editorData = response.editor.map((data: articleUtils.ResponseEditorData) =>
       new EditorDto({
         imageUrl: data.imageUrl,
-        editorName: data.name,
+        editorName: data.editorName,
         position: data.position,
         content: data.content
       })
     );
 
-    const techArticleList = response.data.map((article: articleUtils.ResponseArticleList) =>
+    const techArticleList = response.map((article: articleUtils.ResponseArticleList) =>
       new TechDto(
         {
           id: article.id,

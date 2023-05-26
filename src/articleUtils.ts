@@ -6,7 +6,7 @@ export type RequestData = {
 
 export type ResponseEditorData = {
   imageUrl: string;
-  name: string;
+  editorName: string;
   position: string;
   content: string;
 }
@@ -18,5 +18,5 @@ export type ResponseArticleList = {
   title: string;
   content: string;
   createDate: string;
-  editorData: { ResponseEditorData }
+  editorData:  ResponseEditorData
 }
