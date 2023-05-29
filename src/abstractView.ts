@@ -1,17 +1,21 @@
 export default class AbstractView {
-    setTitle(title) {
+    setTitle(title: string) {
         document.title = title;
     }
 
-    async setup() {
+    async setup():Promise<any> {
     }
 
-    template() { return "" }
+    template(setup : any):string{
+        return ''
+    }
 
-    async render(target) {
+    mounted() {}
+
+    async render(target: HTMLElement) {
         const setupData = await this.setup();
 
-        const main = document.createElement('main');
+        const main:HTMLElement = document.createElement("main");
         main.innerHTML = this.template(setupData);
 
         if (target.firstChild) {
@@ -19,5 +23,7 @@ export default class AbstractView {
         } else {
             target.appendChild(main);
         }
+
+        this.mounted();
     }
 }

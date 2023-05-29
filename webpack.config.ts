@@ -1,14 +1,14 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const path = require("path");
 
 module.exports = {
     mode: "development",
     entry: {
-        msw: path.resolve(__dirname, "src", "mocks", "mswServer.js"),
-        index: path.resolve(__dirname, "src", "index.js"),
+        msw: path.resolve(__dirname, "src", "mocks", "mswServer.ts"),
+        index: path.resolve(__dirname, "src", "index.ts"),
     },
 
     output: {
@@ -16,19 +16,21 @@ module.exports = {
         filename: "[name].js",
         publicPath: "/src/dist/",
     },
-
+    resolve: {
+        extensions: ['.ts', '.js'],
+    },
     plugins: [
         new HtmlWebpackPlugin({
             filename: "index.html",
             template: path.resolve(__dirname, "public", "index.html"),
-            inject: 'body',
+            inject: "body",
         }),
         new CleanWebpackPlugin({
-            cleanAfterEveryBuildPatterns: ["dist"],
+            cleanOnceBeforeBuildPatterns: ["**/*"],
         }),
         new MiniCssExtractPlugin({
-            filename: 'default.css'
-        })
+            filename: "app.css",
+        }),
     ],
 
     module: {
@@ -39,16 +41,17 @@ module.exports = {
             },
             {
                 test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                use: [MiniCssExtractPlugin.loader, "css-loader"],
+            },
+            {
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
+                use: 'ts-loader'
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: 'asset/resource',
+                type: "asset/resource",
             },
         ],
-    },
-
-    experiments: {
-        topLevelAwait: true,
     },
 };

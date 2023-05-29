@@ -1,16 +1,16 @@
-import {CreateRouter} from "./router.js";
+import {CreateRouter} from "./router";
 import "./assets/styles/app.css";
 import "./components/header/header";
 import "./components/footer/footer";
-import tech from "./techArticleList.js";
-import design from "./designArticleList.js";
-import articleView from "./articleView.js";
-import notFoundPage from './pages/notFoundPage';
+import techArticleList from "./techArticleList";
+import DesignArticleList from "./designArticleList";
+import ArticleView from "./articleView";
+import notFoundPage from './page/notFoundPage';
 
 
 const router = new CreateRouter();
 
-const app = document.querySelector("#app");
+const app = document.querySelector("#app") as HTMLElement;
 
 const header = document.createElement("app-header");
 app.before(header);
@@ -19,11 +19,11 @@ const footer = document.createElement("app-footer");
 app.after(footer);
 
 const components = {
-  tech: () => new tech().render(app),
-  design: () => new design().render(app),
-  techArticle: (id) => new articleView(id, 'tech').render(app),
-  designArticle: (id) => new articleView(id, 'design').render(app),
-  notFoundComponent: () => (new notFoundPage().render(app)),
+  tech: () => new techArticleList().render(app),
+  design: () => new DesignArticleList().render(app),
+  techArticle: async (id: number | string) => new ArticleView(id, 'tech').render(app),
+  designArticle: async (id: number | string) => new ArticleView(id, 'design').render(app),
+  notFoundComponent: () => new notFoundPage().render(app),
 };
 
 router

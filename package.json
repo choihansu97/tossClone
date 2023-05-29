@@ -2,9 +2,9 @@
   "name": "tossclone",
   "version": "1.0.0",
   "description": "f-lab",
-  "main": "src/index.js",
+  "main": "src/index.ts",
   "scripts": {
-    "start": "node server.js",
+    "start": "webpack && node server.ts",
     "build": "webpack",
     "lint": "lint-staged",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/choihansu97/tossClone#readme",
   "dependencies": {
+    "@types/file-loader": "^5.0.1",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
@@ -37,6 +38,7 @@
     "lint-staged": "^13.2.1",
     "prettier": "^2.8.8",
     "style-loader": "^3.3.2",
+    "typescript": "^5.0.4",
     "webpack": "^5.80.0",
     "webpack-cli": "^5.0.2",
     "webpack-dev-server": "^4.13.3"
@@ -49,6 +51,8 @@
     "express": "^4.18.2",
     "mini-css-extract-plugin": "^2.7.5",
     "msw": "^1.2.1",
+    "ts-loader": "^9.4.3",
+    "ts-node": "^10.9.1",
     "webpack-cli": "^5.0.2"
   },
   "lint-staged": {
