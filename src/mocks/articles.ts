@@ -2,13 +2,31 @@ import {faker} from "@faker-js/faker";
 
 faker.locale = "ko";
 
-const images = [];
+const images: string[] = [];
 for (let i = 1; i <= 20; i++) {
   const image = require(`../assets/images/thumbnail/${i}.png`);
   images.push(image);
 }
+type PrivateArticleType<T> = {
+  readonly [P in keyof T]: T[P]
+}
 
-const techArticles = [
+interface ArticleListType {
+  id: string | number;
+  category: string;
+  thumbnail: string;
+  title: string;
+  content: string;
+  createDate: string;
+  editor: {
+    imageUrl: string;
+    editorName: string;
+    position: string;
+    content: string;
+  }
+}
+
+const techArticles: PrivateArticleType<ArticleListType>[] = [
   {
     id: faker.datatype.uuid(),
     category: "tech",
@@ -19,7 +37,7 @@ const techArticles = [
     createDate: "2023. 4. 1",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -35,7 +53,7 @@ const techArticles = [
     createDate: "2023. 3. 31",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -51,7 +69,7 @@ const techArticles = [
     createDate: "2023. 3. 22",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -67,7 +85,7 @@ const techArticles = [
     createDate: "2023. 3. 16",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -83,7 +101,7 @@ const techArticles = [
     createDate: "2023. 1. 21",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -99,7 +117,7 @@ const techArticles = [
     createDate: "2022. 12. 12",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -115,7 +133,7 @@ const techArticles = [
     createDate: "2022. 11. 22",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -131,7 +149,7 @@ const techArticles = [
     createDate: "2022. 10. 26",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -147,7 +165,7 @@ const techArticles = [
     createDate: "2022. 10. 25",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -163,14 +181,14 @@ const techArticles = [
     createDate: "2022. 10. 4",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
   },
 ];
 
-const designArticles = [
+const designArticles: PrivateArticleType<ArticleListType>[] = [
   {
     id: faker.datatype.uuid(),
     category: "design",
@@ -181,7 +199,7 @@ const designArticles = [
     createDate: "2023. 5. 4",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -196,7 +214,7 @@ const designArticles = [
     createDate: "2023. 4. 27",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -212,7 +230,7 @@ const designArticles = [
     createDate: "2023. 4. 20",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -228,7 +246,7 @@ const designArticles = [
     createDate: "2023.4. 14",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -244,7 +262,7 @@ const designArticles = [
     createDate: "2023. 3. 28",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -260,7 +278,7 @@ const designArticles = [
     createDate: "2023. 3. 23",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -276,7 +294,7 @@ const designArticles = [
     createDate: "2023. 3. 16",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -292,7 +310,7 @@ const designArticles = [
     createDate: "2023. 3. 7",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -308,7 +326,7 @@ const designArticles = [
     createDate: "2023. 3. 2",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
@@ -323,7 +341,7 @@ const designArticles = [
     createDate: "2023. 1. 19",
     editor: {
       imageUrl: faker.image.avatar(),
-      name: faker.name.firstName(),
+      editorName: faker.name.firstName(),
       position: faker.name.jobTitle(),
       content: faker.lorem.paragraphs(5),
     },
