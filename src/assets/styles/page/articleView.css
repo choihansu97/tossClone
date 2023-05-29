@@ -99,7 +99,7 @@
     margin-top: 16px;
 }
 
-.article-view__reaction-happy a {
+.article-view__reaction-happy a, .article-view__reaction-not-bad a {
     font-size: 4.5rem;
 }
 
