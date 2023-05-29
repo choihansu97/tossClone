@@ -1,39 +1,38 @@
 export class CreateRouter {
-    routes
-    notFoundRoute
+    routes: { fragment: string; regex: RegExp; component: any; params: string[] }[]
+    notFoundRoute: { fragment: string; component: any } | null
 
     constructor() {
         this.routes = [];
         this.notFoundRoute = null;
     }
 
-    addRoute(fragment, component) {
-        const params =
-            fragment.match(/:\w+/g)?.map((param) => param.slice(1)) || [];
+    addRoute(fragment: string, component: any) {
+        const params = fragment.match(/:\w+/g)?.map((param) => param.slice(1)) || [];
         const regexFragment = fragment.replace(/:\w+/g, '([^\\/]+)');
         const regex = new RegExp(`^${regexFragment}\\/?$`);
         this.routes.push({fragment, regex, component, params});
         return this;
     }
 
-    setNotFound(component) {
+    setNotFound(component: any) {
         this.notFoundRoute = {fragment: '*', component};
         return this;
     }
 
-    navigate(pathname) {
+    navigate(pathname: string) {
         window.history.pushState(null, '', pathname);
         this.checkRoute();
         return this;
     }
 
-    routeParams(currentRoute, pathName) {
+    routeParams(currentRoute: any, pathName: string) {
         const matches = pathName.match(currentRoute.regex);
 
-        matches.shift();
+        matches!.shift();
 
-        const params = {};
-        matches.forEach((paramValue, index) => {
+        const params: { [key: string]: string } = {};
+        matches!.forEach((paramValue, index) => {
             const paramName = currentRoute.params[index];
             params[paramName] = paramValue;
         });
@@ -43,7 +42,7 @@ export class CreateRouter {
 
     checkRoute() {
         const path = window.location.pathname;
-        let currentRoute = this.routes.find((route) => route.regex.test(path));
+        let currentRoute: any = this.routes.find((route) => route.regex.test(path));
 
         if (!currentRoute) {
             currentRoute = this.notFoundRoute;
