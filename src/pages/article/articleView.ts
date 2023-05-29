@@ -1,6 +1,6 @@
-import {HttpClient} from "../http";
-import AbstractView from "./abstractView";
-import {ArticleDto, EditorDto} from "./dto/articleDto";
+import {HttpClient} from "../../utils/http";
+import AbstractView from "./core/abstractView";
+import {ArticleDto, EditorDto} from "../../dto/articleDto";
 
 export default class ArticleView extends AbstractView {
     id: string | number;

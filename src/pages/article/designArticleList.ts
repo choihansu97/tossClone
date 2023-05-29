@@ -1,6 +1,6 @@
-import {HttpClient} from "../http";
-import AbstractView from "./abstractView";
-import {DesignDto, EditorDto} from "./dto/designDto";
+import {HttpClient} from "../../utils/http";
+import AbstractView from "./core/abstractView";
+import {DesignDto, EditorDto} from "../../dto/designDto";
 
 export default class DesignArticleList extends AbstractView {
     constructor() {
