@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "outDir": "./dist/",
+    "module": "es6",
+    "target": "es6",
     "allowJs": true,
+    "moduleResolution": "node",
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false

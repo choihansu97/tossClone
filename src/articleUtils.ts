@@ -12,11 +12,12 @@ export type ResponseEditorData = {
 }
 
 export type ResponseArticleList = {
-  id: string | number;
+  id: string;
   category: string;
   thumbnail: string;
   title: string;
   content: string;
   createDate: string;
-  editorData:  ResponseEditorData
+  editor: ResponseEditorData;
 }
+

@@ -1,53 +1,54 @@
-import { HttpClient } from "../http";
+import {HttpClient} from "../http";
 import AbstractView from "./abstractView";
-import { ArticleDto, EditorDto } from "./dto/articleDto";
-import * as articleUtils from "./articleUtils";
+import {ArticleDto, EditorDto} from "./dto/articleDto";
 
 export default class ArticleView extends AbstractView {
-  id: string | number;
-  category: string;
+    id: string | number;
+    category: string;
 
-  constructor(id: string | number, category: string) {
-    super();
-    this.id = id;
-    this.category = category;
-  }
+    constructor(id: string | number, category: string) {
+        super();
+        this.id = id;
+        this.category = category;
+    }
 
-  async setup(): Promise<ArticleDto> {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    const client = new HttpClient();
+    async setup(): Promise<ArticleDto> {
+        window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+        const client = new HttpClient();
 
-    const response: articleUtils.ResponseArticleList = await client.get({
-      path: `/api/${this.category}/articles/:id`,
-      requestParams: this.id
-    });
+        const response: { data: any; error: any } = await client.get({
+            path: `/api/${this.category}/articles/:id`,
+            requestParams: this.id
+        });
 
-    const editor = new EditorDto({
-      imageUrl: response.editorData.imageUrl,
-      editorName: response.editorData.editorName,
-      position: response.editorData.position,
-      content: response.editorData.content
-    });
+        if (response && response.data) {
+            const editor = new EditorDto(
+                response.data.editor.imageUrl,
+                response.data.editor.editorName,
+                response.data.editor.position,
+                response.data.editor.content
+            );
 
-    const articleView = new ArticleDto({
-      id: response.id,
-      category: response.category,
-      thumbnail: response.thumbnail,
-      title: response.title,
-      content: response.content,
-      createDate: response.createDate,
-      editor: editor
-    });
-    articleView.validate();
+            const articleView = new ArticleDto(
+                response.data.id,
+                response.data.category,
+                response.data.thumbnail,
+                response.data.title,
+                response.data.content,
+                response.data.createDate,
+                editor
+            );
+            articleView.validate();
 
-    document.title = articleView.title;
-    return articleView;
-  }
+            document.title = articleView.title;
+            return articleView;
+        } else {
+            throw new Error("Failed to fetch article data.");
+        }
+    }
 
-  template() {
-    const articleView: ArticleDto = this.setup();
-
-    let articleHtml = `
+    template(articleView: ArticleDto) {
+        let articleHtml = `
       <article class="article-view-inner">
           <img class= "article-view-inner__image" src="${articleView.thumbnail}" alt="${articleView.title}">
 
@@ -82,10 +83,10 @@ export default class ArticleView extends AbstractView {
       </article>
     `;
 
-    return `
+        return `
             <article class="article-view-container">
               ${articleHtml}
             </article>
       `;
-  }
+    }
 }

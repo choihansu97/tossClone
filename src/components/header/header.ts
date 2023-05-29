@@ -1,6 +1,10 @@
 import headerImage from "../../assets/images/tossLogo.png";
 
 class Header extends HTMLElement {
+    constructor() {
+        super();
+    }
+
     connectedCallback(): void {
         this.innerHTML = `          
           <header class="header-container">

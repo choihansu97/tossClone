@@ -20,7 +20,7 @@ interface ArticleListType {
     createDate: string;
     editor: {
         imageUrl: string;
-        name: string;
+        editorName: string;
         position: string;
         content: string;
     }
@@ -37,7 +37,7 @@ const techArticles: PrivateArticleType<ArticleListType>[] = [
         createDate: "2023. 4. 1",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -53,7 +53,7 @@ const techArticles: PrivateArticleType<ArticleListType>[] = [
         createDate: "2023. 3. 31",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -69,7 +69,7 @@ const techArticles: PrivateArticleType<ArticleListType>[] = [
         createDate: "2023. 3. 22",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -85,7 +85,7 @@ const techArticles: PrivateArticleType<ArticleListType>[] = [
         createDate: "2023. 3. 16",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -101,7 +101,7 @@ const techArticles: PrivateArticleType<ArticleListType>[] = [
         createDate: "2023. 1. 21",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -117,7 +117,7 @@ const techArticles: PrivateArticleType<ArticleListType>[] = [
         createDate: "2022. 12. 12",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -133,7 +133,7 @@ const techArticles: PrivateArticleType<ArticleListType>[] = [
         createDate: "2022. 11. 22",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -149,7 +149,7 @@ const techArticles: PrivateArticleType<ArticleListType>[] = [
         createDate: "2022. 10. 26",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -165,7 +165,7 @@ const techArticles: PrivateArticleType<ArticleListType>[] = [
         createDate: "2022. 10. 25",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -181,14 +181,14 @@ const techArticles: PrivateArticleType<ArticleListType>[] = [
         createDate: "2022. 10. 4",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
     },
 ];
 
-const designArticles: ArticleListType[] = [
+const designArticles: PrivateArticleType<ArticleListType>[] = [
     {
         id: faker.datatype.uuid(),
         category: "design",
@@ -199,7 +199,7 @@ const designArticles: ArticleListType[] = [
         createDate: "2023. 5. 4",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -214,7 +214,7 @@ const designArticles: ArticleListType[] = [
         createDate: "2023. 4. 27",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -230,7 +230,7 @@ const designArticles: ArticleListType[] = [
         createDate: "2023. 4. 20",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -246,7 +246,7 @@ const designArticles: ArticleListType[] = [
         createDate: "2023.4. 14",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -262,7 +262,7 @@ const designArticles: ArticleListType[] = [
         createDate: "2023. 3. 28",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -278,7 +278,7 @@ const designArticles: ArticleListType[] = [
         createDate: "2023. 3. 23",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -294,7 +294,7 @@ const designArticles: ArticleListType[] = [
         createDate: "2023. 3. 16",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -310,7 +310,7 @@ const designArticles: ArticleListType[] = [
         createDate: "2023. 3. 7",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -326,7 +326,7 @@ const designArticles: ArticleListType[] = [
         createDate: "2023. 3. 2",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },
@@ -341,7 +341,7 @@ const designArticles: ArticleListType[] = [
         createDate: "2023. 1. 19",
         editor: {
             imageUrl: faker.image.avatar(),
-            name: faker.name.firstName(),
+            editorName: faker.name.firstName(),
             position: faker.name.jobTitle(),
             content: faker.lorem.paragraphs(5),
         },

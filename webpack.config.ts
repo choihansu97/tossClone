@@ -16,7 +16,9 @@ module.exports = {
     filename: "[name].js",
     publicPath: "/src/dist/",
   },
-
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       filename: "index.html",
@@ -24,7 +26,7 @@ module.exports = {
       inject: "body",
     }),
     new CleanWebpackPlugin({
-      cleanAfterEveryBuildPatterns: ["dist"],
+      cleanOnceBeforeBuildPatterns: ["**/*"],
     }),
     new MiniCssExtractPlugin({
       filename: "app.css",
