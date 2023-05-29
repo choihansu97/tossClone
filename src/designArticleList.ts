@@ -1,50 +1,49 @@
-import { HttpClient } from "../http";
+import {HttpClient} from "../http";
 import AbstractView from "./abstractView";
-import { DesignDto, EditorDto } from "./dto/designDto";
+import {DesignDto, EditorDto} from "./dto/designDto";
 
-const API_BASE_URL = "http://localhost:3000";
+export default class DesignArticleList extends AbstractView {
+    constructor() {
+        super();
+        this.setTitle("토스 기술 블로그, 토스테크 글 목록");
+    }
 
-export default class extends AbstractView {
-  constructor() {
-    super();
-    this.setTitle("토스 기술 블로그, 토스테크 글 목록");
-  }
+    async setup(): Promise<DesignDto[]> {
+        const client = new HttpClient();
+        const response: { data: any; error: any } = await client.get({path: "/api/design/articles"});
 
-  async setup() {
-    const client = new HttpClient({ baseUrl: API_BASE_URL });
-    const response = await client.get({
-      path: "/api/design/articles"
-    });
+        if (response && Array.isArray(response.data)) {
+            const editorData = response.data.map((data: any) =>
+                new EditorDto(
+                    data.editor.imageUrl,
+                    data.editor.editorName,
+                    data.editor.position,
+                    data.editor.content
+                )
+            );
 
-    const editorData = response.data.map(
-      (data) =>
-        new EditorDto(
-          data.editor.imageUrl,
-          data.editor.name,
-          data.editor.position,
-          data.editor.content
-        )
-    );
+            const designArticleList = response.data.map((article: any) =>
+                new DesignDto(
+                    article.id,
+                    article.category,
+                    article.thumbnail,
+                    article.title,
+                    article.content,
+                    article.createDate,
+                    editorData
+                )
+            );
 
-    const designArticleList = response.data.map(
-      (article) =>
-        new DesignDto(
-          article.id,
-          article.category,
-          article.thumbnail,
-          article.title,
-          article.content,
-          article.createDate,
-          editorData
-        )
-    );
-    return designArticleList;
-  }
+            return designArticleList;
+        }
 
-  template(designArticleList) {
-    let articleHtml = "";
-    for (const article of designArticleList) {
-      articleHtml += `
+        return [];
+    }
+
+    template(designArticleList: DesignDto[]): string {
+        let articleHtml = "";
+        for (const article of designArticleList) {
+            articleHtml += `
         <li class="article-list__item">
           <a class="article-list__link" href="/design/article/${article.id}">
             <img class="article-list__thumbnail" src="${article.thumbnail}" alt="${article.title}">
@@ -56,9 +55,9 @@ export default class extends AbstractView {
           </a>
         </li>
     `;
-    }
+        }
 
-    return `
+        return `
       <article class="article-list-container">
         <div class="article-list-inner">
           <h1 class="article-list-inner__title">디자인</h1>
@@ -67,13 +66,6 @@ export default class extends AbstractView {
           </ul>
         </div>
       </article>
-      `;
-  }
-
-  async render(target) {
-    const designArticleList = await this.setup();
-    if (target) {
-      target.innerHTML = `${this.template(designArticleList)}`;
+    `;
     }
-  }
 }
