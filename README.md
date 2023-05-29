@@ -34,38 +34,38 @@ npm run start
 ├── README.md
 ├── package-lock.json
 ├── package.json
-├── server.js
-├── webpack.config.js
+├── server.ts
+├── webpack.config.ts
 ├── public
     ├── index.html
     ├── mockServiceWorker.js
 └── src
     ├── components
     |   ├── Header
-    |   |   ├── header.js
+    |   |   ├── header.ts
     |   ├── Footer
-    |   |   ├── footer.js
+    |   |   ├── footer.ts
     ├── dto
-    │   ├── articleDto.js
-    │   ├── designDto.js
-    │   └── techDto.js
+    │   ├── articleDto.ts
+    │   ├── designDto.ts
+    │   └── techDto.ts
     ├── mocks
-    │   ├── browser.js
-    │   ├── handlers.js
-    │   └── mswServer.js
+    │   ├── browser.ts
+    │   ├── handlers.ts
+    │   └── mswServer.ts
     ├── lib
     │   ├── http.js
-    │   ├── abstractView.js
+    │   ├── abstractView.ts
     ├── pages
-    │   ├── articleView.js
-    │   ├── designArticleList.js
-    │   ├── techArticleList.js
-    │   └── notFoundPage.js
+    │   ├── articleView.ts
+    │   ├── designArticleList.ts
+    │   ├── techArticleList.ts
+    │   └── notFoundPage.ts
     ├── assets
     │   ├── fonts
     │   ├── images
     │   ├── styles
     ├── util
-    │   └── router.js
-    └── index.js
+    │   └── router.ts
+    └── index.ts
 ```

@@ -1,6 +1,6 @@
-import {HttpClient} from "../http.js";
-import AbstractView from "./abstractView";
-import {TechDto, EditorDto} from "./dto/techDto";
+import {HttpClient} from "../../utils/http.js";
+import AbstractView from "./core/abstractView";
+import {TechDto, EditorDto} from "../../dto/techDto";
 
 export default class TechArticleList extends AbstractView {
     constructor() {
