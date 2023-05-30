@@ -42,30 +42,36 @@ npm run start
 └── src
     ├── components
     |   ├── Header
-    |   |   ├── header.ts
+    |   |   └── header.ts
     |   ├── Footer
-    |   |   ├── footer.ts
+    |   |   └── footer.ts
     ├── dto
     │   ├── articleDto.ts
     │   ├── designDto.ts
     │   └── techDto.ts
-    ├── mocks
-    │   ├── browser.ts
-    │   ├── handlers.ts
-    │   └── mswServer.ts
     ├── lib
-    │   ├── http.js
-    │   ├── abstractView.ts
+    │   ├── mocks
+    │   │  ├── browser.ts  
+    │   │  ├── handlers.ts
+    │   │  ├── mswServer.ts
+    │   │  └── articles.ts
+    │   ├── router
+    │   │  ├── components.ts
+    │   │  └── router.ts
     ├── pages
-    │   ├── articleView.ts
-    │   ├── designArticleList.ts
-    │   ├── techArticleList.ts
+    │   ├── article
+    │   │   └── core     
+    │   │   │   └── abstractView.ts     
+    │   │   ├──articleView.ts
+    │   │   ├──designArticleList.ts
+    │   │   ├──techArticleList.ts
     │   └── notFoundPage.ts
     ├── assets
     │   ├── fonts
     │   ├── images
     │   ├── styles
     ├── util
-    │   └── router.ts
+    │   └── http.js
     └── index.ts
 ```
+
