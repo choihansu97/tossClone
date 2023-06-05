@@ -1,4 +1,5 @@
 import headerImage from "../../assets/images/tossLogo.png";
+import LocalStorage from '../../utils/storage';
 
 class Header extends HTMLElement {
     connectedCallback(): void {
@@ -49,23 +50,26 @@ class Header extends HTMLElement {
         const iconOn = this.querySelector('.icon-on') as HTMLElement;
         const iconClose = this.querySelector('.icon-close') as HTMLElement;
 
-        const isMenuOpen: boolean = localStorage.getItem('isMenuOpen') === 'true';
+        const localStorage = new LocalStorage();
+        localStorage.setItem('isMenuOpen', 'true', 3);
+
+        const isMenuOpen = localStorage.getItem('isMenuOpen') === 'true';
         if (isMenuOpen) {
             menuContentList.classList.add('show-menu-list');
         }
 
-        menuToggleButton.addEventListener("click", () => {
-            menuContentList.classList.toggle("show-menu-list");
+        menuToggleButton.addEventListener('click', () => {
+            menuContentList.classList.toggle('show-menu-list');
 
             if (menuContentList.classList.contains('show-menu-list')) {
                 iconOn.style.display = 'none';
-                iconClose.style.display = 'block'
+                iconClose.style.display = 'block';
             } else {
                 iconOn.style.display = 'block';
-                iconClose.style.display = 'none'
+                iconClose.style.display = 'none';
             }
 
-            (localStorage as Storage).setItem('isMenuOpen', menuContentList.classList.contains('show-menu-list').toString());
+            localStorage.setItem('isMenuOpen', menuContentList.classList.contains('show-menu-list').toString(), 3);
         });
     }
 }
