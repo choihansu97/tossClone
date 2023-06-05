@@ -1,64 +1,66 @@
 import alphaImage from "../../assets/images/alpha.png";
 
 interface SiteLink {
-    [key: string]: string;
+  url: string;
+  text: string;
 }
 
 interface SocialList {
-    [key: string]: string;
+  link: string;
+  imageSrc: string;
+  alt: string;
 }
 
 class Footer extends HTMLElement {
+  private SiteGroupLinks: Record<string, SiteLink[]> = {
+    tech: [
+      { url: "mailto:techblog@toss.im", text: "의견 보내기" }
+    ],
+    toss: [
+      { url: "https://toss.im", text: "홈페이지" },
+      { url: "https://team.toss.im", text: "회사 소개" },
+      { url: "https://toss.im/career", text: "채용" }
+    ],
+    customer: [
+      { url: "tel:1599-4905", text: "전화: 1599-4905 (24시간 연중무휴)" },
+      { url: "mailto:support.toss.im", text: "이메일: support@toss.im" },
+      { url: "https://goto.kakao.com/@toss", text: "카카오톡: @toss" }
+    ]
+  };
 
-    private SiteGroupLinks: Record<string, SiteLink[]> = {
-        tech: [
-            {url: "mailto:techblog@toss.im", text: "의견 보내기"}
-        ],
-        toss: [
-            {url: "https://toss.im", text: "홈페이지"},
-            {url: "https://team.toss.im", text: "회사 소개"},
-            {url: "https://toss.im/career", text: "채용"}
-        ],
-        customer: [
-            {url: "tel:1599-4905", text: "전화: 1599-4905 (24시간 연중무휴)"},
-            {url: "mailto:support.toss.im", text: "이메일: support@toss.im"},
-            {url: "https://goto.kakao.com/@toss", text: "카카오톡: @toss"}
-        ]
-    };
+  private SocialData: SocialList[] = [
+    {
+      link: "https://www.facebook.com/toss.revolution",
+      imageSrc:
+        "https://static.toss.im/assets/homepage/safety/icn-facebook.svg",
+      alt: "Toss Facebook"
+    },
+    {
+      link: "https://blog.toss.im",
+      imageSrc: "https://static.toss.im/assets/homepage/safety/icn-blog.svg",
+      alt: "Toss blog"
+    },
+    {
+      link: "https://post.naver.com/tossblog",
+      imageSrc: "https://static.toss.im/assets/homepage/safety/icn-naver.svg",
+      alt: "Toss Naver"
+    },
+    {
+      link: "https://twitter.com/toss__official",
+      imageSrc:
+        "https://static.toss.im/assets/homepage/safety/icn-twitter.svg",
+      alt: "Toss Twitter"
+    },
+    {
+      link: "https://www.instagram.com/toss.im",
+      imageSrc:
+        "https://static.toss.im/assets/homepage/safety/icn-instagram.svg",
+      alt: "Toss Instagram"
+    }
+  ];
 
-    private SocialData: SocialList[] = [
-        {
-            link: "https://www.facebook.com/toss.revolution",
-            imageSrc:
-                "https://static.toss.im/assets/homepage/safety/icn-facebook.svg",
-            alt: "Toss Facebook"
-        },
-        {
-            link: "https://blog.toss.im",
-            imageSrc: "https://static.toss.im/assets/homepage/safety/icn-blog.svg",
-            alt: "Toss blog"
-        },
-        {
-            link: "https://post.naver.com/tossblog",
-            imageSrc: "https://static.toss.im/assets/homepage/safety/icn-naver.svg",
-            alt: "Toss Naver"
-        },
-        {
-            link: "https://twitter.com/toss__official",
-            imageSrc:
-                "https://static.toss.im/assets/homepage/safety/icn-twitter.svg",
-            alt: "Toss Twitter"
-        },
-        {
-            link: "https://www.instagram.com/toss.im",
-            imageSrc:
-                "https://static.toss.im/assets/homepage/safety/icn-instagram.svg",
-            alt: "Toss Instagram"
-        }
-    ];
-
-    connectedCallback() {
-        this.innerHTML = `
+  connectedCallback() {
+    this.innerHTML = `
           <footer class="footer">
               <section class="footer__career">
                 <div class="career__content">
@@ -88,44 +90,44 @@ class Footer extends HTMLElement {
               </article>
           </footer>
       `;
-    }
+  }
 
-    _createSiteGroup(title: string, links: SiteLink[]): HTMLElement {
-        const siteGroup = document.createElement("div");
-        siteGroup.classList.add("site-group__list__item");
+  _createSiteGroup(title: string, links: SiteLink[]): HTMLElement {
+    const siteGroup = document.createElement("div");
+    siteGroup.classList.add("site-group__list__item");
 
-        const siteTitle = document.createElement("strong");
-        siteTitle.classList.add("footer__site-group__title");
-        siteTitle.textContent = title;
+    const siteTitle = document.createElement("strong");
+    siteTitle.classList.add("footer__site-group__title");
+    siteTitle.textContent = title;
 
-        const siteList = document.createElement("ul");
-        siteList.classList.add("footer__site-group__item");
+    const siteList = document.createElement("ul");
+    siteList.classList.add("footer__site-group__item");
 
-        links.forEach(link => {
-            const siteLink = document.createElement("li");
-            const linkTag = document.createElement("a");
-            linkTag.href = link.url;
-            linkTag.textContent = link.text;
+    links.map((link) => {
+        const siteLink = document.createElement("li");
+        const linkTag = document.createElement("a");
+        linkTag.href = link.url;
+        linkTag.textContent = link.text;
 
-            siteLink?.appendChild(linkTag);
-            siteList?.appendChild(siteLink);
-        });
+        siteLink?.appendChild(linkTag);
+        siteList?.appendChild(siteLink);
+    });
 
-        siteGroup?.appendChild(siteTitle);
-        siteGroup?.appendChild(siteList);
+    siteGroup?.appendChild(siteTitle);
+    siteGroup?.appendChild(siteList);
 
-        return siteGroup;
-    }
+    return siteGroup;
+  }
 
-    _createSocialList(): string {
-        return this.SocialData.map((item) => {
-            return `<li class="footer-social-item">
+  _createSocialList(): string {
+    return this.SocialData.map((item) => {
+      return `<li class="footer-social-item">
                 <a href="${item.link}">
                     <img src="${item.imageSrc}" alt="${item.alt}">
                 </a>
              </li>`;
-        }).join("");
-    }
+    }).join("");
+  }
 }
 
 customElements.define("app-footer", Footer);
