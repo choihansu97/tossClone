@@ -6,12 +6,12 @@ class LocalStorage {
   }
 
   protected loadData(): void {
-    const dataStr = localStorage.getItem('data');
+    const dataStr = localStorage.getItem("data");
     this.data = dataStr ? JSON.parse(dataStr) : {};
   }
 
   protected saveData(): void {
-    localStorage.setItem('data', JSON.stringify(this.data));
+    localStorage.setItem("data", JSON.stringify(this.data));
   }
 
   public getItem(key: string): string | null {
@@ -37,7 +37,7 @@ class LocalStorage {
 
     const item = {
       value: value,
-      expiry: expiryDate.toISOString(),
+      expiry: expiryDate.toISOString()
     };
 
     this.data[key] = item;

@@ -1,18 +1,25 @@
 import {HttpClient} from "../../utils/http.js";
 import AbstractView from "./core/abstractView";
 import {TechDto, EditorDto} from "../../dto/techDto";
+import { Skeleton } from "../../skeleton";
 
 export default class TechArticleList extends AbstractView {
+    isLoading:boolean;
+
     constructor() {
         super();
         this.setTitle("토스 기술 블로그, 토스테크 글 목록");
+        this.isLoading = false;
     }
 
     async setup(): Promise<TechDto[]> {
+        this.isLoading = true;
+
         const client = new HttpClient();
         const response: { data: any; error: any } = await client.get({path: "/api/tech/articles"});
 
         if (response && Array.isArray(response.data)) {
+            this.isLoading = false;
             const editorData = response.data.map((data: any) =>
                 new EditorDto(
                     data.editor.imageUrl,
@@ -39,6 +46,11 @@ export default class TechArticleList extends AbstractView {
     }
 
     template(techArticleList: TechDto[]): string {
+        if (this.isLoading === true) {
+            const skeleton = new Skeleton();
+            return skeleton.template();
+        }
+
         let articleHtml = "";
         for (const article of techArticleList) {
             articleHtml += `
