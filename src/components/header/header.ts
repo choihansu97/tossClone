@@ -1,14 +1,14 @@
 import headerImage from "../../assets/images/tossLogo.png";
-import LocalStorage from '../../utils/storage';
+import LocalStorage from "../../utils/storage";
 
 class Header extends HTMLElement {
-    connectedCallback(): void {
-        this.innerHTML = `          
+  connectedCallback(): void {
+    this.innerHTML = `          
           <header class="header-container">
             <div class="header-container__inner">
                 <div class="header-container__logo">
                   <a href="/tech">
-                    <img src='${headerImage}' alt="토스 로고">
+                    <img src="${headerImage}" alt="토스 로고">
                   </a>
                 </div>
                 
@@ -35,43 +35,44 @@ class Header extends HTMLElement {
           </header>
         `;
 
-        const headerPosition = this.querySelector(".header-container") as HTMLElement;
+      const headerPosition: HTMLElement | null = this.querySelector(".header-container");
 
-        window.addEventListener("scroll", () => {
-            if (window.pageYOffset > 0) {
-                headerPosition?.classList.add("header-container__fixed");
-            } else {
-                headerPosition?.classList.remove("header-container__fixed");
-            }
-        });
+      let isHeaderFixed = false;
 
-        const menuToggleButton = this.querySelector(".header-container__mobile-nav-button") as HTMLElement;
-        const menuContentList = this.querySelector(".header-container__position") as HTMLElement;
-        const iconOn = this.querySelector('.icon-on') as HTMLElement;
-        const iconClose = this.querySelector('.icon-close') as HTMLElement;
+      function updateHeaderClass() {
+          headerPosition?.classList.toggle("header-container__fixed", isHeaderFixed);
+      }
 
-        const localStorage = new LocalStorage();
-        localStorage.setItem('isMenuOpen', 'true', 3);
+      function handleScroll() {
+          isHeaderFixed = window.scrollY > 0;
+          requestAnimationFrame(updateHeaderClass);
+      }
 
-        const isMenuOpen = localStorage.getItem('isMenuOpen') === 'true';
-        if (isMenuOpen) {
-            menuContentList.classList.add('show-menu-list');
-        }
+      const menuToggleButton: HTMLElement | null = this.querySelector(".header-container__mobile-nav-button");
+      const menuContentList: HTMLElement | null = this.querySelector(".header-container__position");
+      const iconOn: HTMLElement | null = this.querySelector(".icon-on");
+      const iconClose: HTMLElement | null = this.querySelector(".icon-close");
 
-        menuToggleButton.addEventListener('click', () => {
-            menuContentList.classList.toggle('show-menu-list');
+      if (menuToggleButton && menuContentList && iconOn && iconClose && headerPosition) {
+          const localStorage = new LocalStorage();
 
-            if (menuContentList.classList.contains('show-menu-list')) {
-                iconOn.style.display = 'none';
-                iconClose.style.display = 'block';
-            } else {
-                iconOn.style.display = 'block';
-                iconClose.style.display = 'none';
-            }
+          const isMenuOpen = localStorage.getItem("isMenuOpen") === "true";
+          menuContentList.classList.toggle("show-menu-list", isMenuOpen);
 
-            localStorage.setItem('isMenuOpen', menuContentList.classList.contains('show-menu-list').toString(), 3);
-        });
-    }
+          menuToggleButton.addEventListener("click", function() {
+              const isMenuListVisible = menuContentList.classList.toggle("show-menu-list");
+
+              if (iconOn && iconClose) {
+                  iconOn.style.display = isMenuListVisible ? "none" : "block";
+                  iconClose.style.display = isMenuListVisible ? "block" : "none";
+              }
+
+              localStorage.setItem("isMenuOpen", isMenuListVisible.toString(), 3);
+          });
+
+          window.addEventListener("scroll", handleScroll);
+      }
+  }
 }
 
 customElements.define("app-header", Header);
