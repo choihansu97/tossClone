@@ -4,7 +4,7 @@ faker.locale = "ko";
 
 const images: string[] = [];
 for (let i = 1; i <= 20; i++) {
-    const image = require(`../../assets/images/thumbnail/${i}.png`);
+    const image = require(`../../assets/images/thumbnail/listThumbnailImages${i}.png`);
     images.push(image);
 }
 type PrivateArticleType<T> = {
