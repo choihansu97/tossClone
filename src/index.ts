@@ -3,13 +3,14 @@ import "./components/header/header";
 import "./components/footer/footer";
 import Routes from "./lib/router/components";
 
-const app = document.querySelector("#app") as HTMLElement;
+const app = document.querySelector("#app");
 
-new Routes(app);
+if (app instanceof HTMLElement) {
+    new Routes(app);
 
-const header = document.createElement("app-header");
-app.before(header);
+    const header = document.createElement("app-header");
+    app.before(header);
 
-const footer = document.createElement("app-footer");
-app.after(footer);
-
+    const footer = document.createElement("app-footer");
+    app.after(footer);
+}
