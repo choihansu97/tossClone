@@ -1,32 +1,37 @@
 export class CreateRouter {
-    routes: { fragment: string; regex: RegExp; component: any; params: string[] }[]
-    notFoundRoute: { fragment: string; component: any } | null
+    private routes: {
+        fragment: string;
+        regex: RegExp;
+        component: any;
+        params: string[];
+    }[];
+    private notFoundRoute: { fragment: string; component: any } | null;
 
     constructor() {
         this.routes = [];
         this.notFoundRoute = null;
     }
 
-    addRoute(fragment: string, component: any) {
+    public addRoute(fragment: string, component: any): CreateRouter {
         const params = fragment.match(/:\w+/g)?.map((param) => param.slice(1)) || [];
         const regexFragment = fragment.replace(/:\w+/g, '([^\\/]+)');
         const regex = new RegExp(`^${regexFragment}\\/?$`);
-        this.routes.push({fragment, regex, component, params});
+        this.routes.push({ fragment, regex, component, params });
         return this;
     }
 
-    setNotFound(component: any) {
-        this.notFoundRoute = {fragment: '*', component};
+    public setNotFound(component: any): CreateRouter {
+        this.notFoundRoute = { fragment: '*', component };
         return this;
     }
 
-    navigate(pathname: string) {
+    private navigate(pathname: string): CreateRouter {
         window.history.pushState(null, '', pathname);
         this.checkRoute();
         return this;
     }
 
-    routeParams(currentRoute: any, pathName: string) {
+    private routeParams(currentRoute: any, pathName: string) {
         const matches = pathName.match(currentRoute.regex);
 
         matches!.shift();
@@ -40,7 +45,7 @@ export class CreateRouter {
         return params;
     }
 
-    checkRoute() {
+    private checkRoute() {
         const path = window.location.pathname;
         let currentRoute: any = this.routes.find((route) => route.regex.test(path));
 
@@ -52,10 +57,11 @@ export class CreateRouter {
         currentRoute.component(urlParams);
     }
 
-    start() {
+    public start() {
         window.addEventListener('click', (e: MouseEvent) => {
-            const target: HTMLAnchorElement | null = (e.target as HTMLAnchorElement).closest('a');
-            if (target) {
+            const target = (e.target as HTMLAnchorElement).closest('a');
+
+            if (target instanceof HTMLAnchorElement) {
                 e.preventDefault();
                 this.navigate(target.href);
             }
