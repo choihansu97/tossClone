@@ -6,7 +6,7 @@ export default class extends AbstractView {
         document.title = '404: This page could not be found';
     }
 
-    template():string {
+    protected template():string {
         let articleHtml = `
             <h1 class="not-found-title">404</h1>
             <div class="not-found-description">This page could not be found</div>
