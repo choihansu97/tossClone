@@ -3,22 +3,22 @@ import AbstractView from "./core/abstractView";
 import {ArticleDto, EditorDto} from "../../dto/articleDto";
 
 export default class ArticleView extends AbstractView {
-    id: string | number;
+    id: string | number | null;
     category: string;
 
-    constructor(id: string | number, category: string) {
+    constructor(id: string | number | null, category: string) {
         super();
         this.id = id;
         this.category = category;
     }
 
-    async setup(): Promise<ArticleDto> {
+    protected async setup(): Promise<ArticleDto> {
         window.scrollTo({top: 0, left: 0, behavior: "smooth"});
         const client = new HttpClient();
 
-        const response: { data: any; error: any } = await client.get({
-            path: `/api/${this.category}/articles/:id`,
-            requestParams: this.id
+        const response = await client.request({
+            path: `/api/${this.category}/article/${this.id}`,
+            method: 'GET',
         });
 
         if (response && response.data) {
@@ -47,41 +47,41 @@ export default class ArticleView extends AbstractView {
         }
     }
 
-    template(articleView: ArticleDto) {
+    protected template(articleView: ArticleDto) {
         let articleHtml = `
-      <article class="article-view-inner">
-          <img class= "article-view-inner__image" src="${articleView.thumbnail}" alt="${articleView.title}">
-
-          <h2 class="article-view-inner__title">${articleView.title}</h2>
-          
-          <div class="article-author">
-            <img class="article-author-image" src="${articleView.editor.imageUrl}" alt="${articleView.title}">
-            
-            <section class="article-view-inner__author-about">
-              <div class="author-profile">
-                <span class="author-profile__name">${articleView.editor.editorName}</span>
-                <span class="author-profile__position">ㆍ${articleView.editor.position}</span>
+          <article class="article-view-inner">
+              <img class= "article-view-inner__image" src="${articleView.thumbnail}" alt="${articleView.title}">
+    
+              <h2 class="article-view-inner__title">${articleView.title}</h2>
+              
+              <div class="article-author">
+                <img class="article-author-image" src="${articleView.editor.imageUrl}" alt="${articleView.title}">
+                
+                <section class="article-view-inner__author-about">
+                  <div class="author-profile">
+                    <span class="author-profile__name">${articleView.editor.editorName}</span>
+                    <span class="author-profile__position">ㆍ${articleView.editor.position}</span>
+                  </div>
+                  
+                  <div class="article-view-inner__posted-date">${articleView.createDate}</div>
+                </section>
               </div>
               
-              <div class="article-view-inner__posted-date">${articleView.createDate}</div>
-            </section>
-          </div>
-          
-          <p class="article-view-inner__content">${articleView.editor.content}</p>
-          
-          <section class="article-view-inner__reaction">
-            <h2 class="article-view-inner__reaction__title">재미있게 읽으셨나요?</h2>
-            <p class="article-view-inner__reaction__sub-title">좋았는지, 아쉬웠는지, 아래 이모지를 눌러 의견을 들려주세요.</p>
-            
-            <div class="article-view__reaction-choice">
-                <div class="article-view__reaction-happy"><a href="#">😍</a></div>
-                <div class="article-view__reaction-not-bad"><a href="#">🤔</a></div>
-            </div>
-            
-            <button class="article-view__reaction__link">아티클 공유하기</button>
-          </section>
-      </article>
-    `;
+              <p class="article-view-inner__content">${articleView.editor.content}</p>
+              
+              <section class="article-view-inner__reaction">
+                <h2 class="article-view-inner__reaction__title">재미있게 읽으셨나요?</h2>
+                <p class="article-view-inner__reaction__sub-title">좋았는지, 아쉬웠는지, 아래 이모지를 눌러 의견을 들려주세요.</p>
+                
+                <div class="article-view__reaction-choice">
+                    <div class="article-view__reaction-happy"><a href="#">😍</a></div>
+                    <div class="article-view__reaction-not-bad"><a href="#">🤔</a></div>
+                </div>
+                
+                <button class="article-view__reaction__link">아티클 공유하기</button>
+              </section>
+          </article>
+        `;
 
         return `
             <article class="article-view-container">

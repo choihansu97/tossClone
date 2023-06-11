@@ -29,8 +29,8 @@ export default class Routes {
             .addRoute("/", this.components.tech)
             .addRoute("/tech", this.components.tech)
             .addRoute("/design", this.components.design)
-            .addRoute("/tech/article/:id", this.components.techArticle)
-            .addRoute("/design/article/:id", this.components.designArticle)
+            .addRoute("/tech/article/:id", (params: { id: number | string }) => this.components.techArticle(params.id))
+            .addRoute("/design/article/:id", (params: { id: number | string }) => this.components.designArticle(params.id))
             .setNotFound(this.components.notFoundComponent)
             .start();
     }

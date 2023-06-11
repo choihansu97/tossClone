@@ -1,18 +1,18 @@
 export default class AbstractView {
-    setTitle(title: string) {
+    protected setTitle(title: string) {
         document.title = title;
     }
 
-    async setup():Promise<any> {
+    protected async setup():Promise<any> {
     }
 
-    template(setup : any):string{
+    protected template(setup : any):string{
         return ''
     }
 
-    mounted() {}
+    protected mounted() {}
 
-    async render(target: HTMLElement) {
+    public async render(target: HTMLElement) {
         const setupData = await this.setup();
 
         const main:HTMLElement = document.createElement("main");
