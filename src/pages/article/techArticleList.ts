@@ -1,5 +1,5 @@
 import AbstractView from "./core/abstractView";
-import {HttpClient} from "../../utils/http.js";
+import {HttpClient} from "../../utils/http";
 import {TechDto, EditorDto} from "../../dto/techDto";
 import {DesignDto} from "../../dto/designDto";
 
@@ -11,7 +11,10 @@ export default class TechArticleList extends AbstractView {
 
     protected async setup(): Promise<TechDto[]> {
         const client = new HttpClient();
-        const response: { data: any; error: any } = await client.get({path: "/api/tech/articles"});
+        const response = await client.request({
+            path: `/api/tech/articles/`,
+            method: 'GET',
+        });
 
         if (response && Array.isArray(response.data)) {
             const techArticleList = response.data.map((article: any) => {

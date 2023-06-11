@@ -10,7 +10,10 @@ export default class DesignArticleList extends AbstractView {
 
     protected async setup(): Promise<DesignDto[]> {
         const client = new HttpClient();
-        const response: { data: any; error: any } = await client.get({path: "/api/design/articles"});
+        const response = await client.request({
+            path: `/api/design/articles/`,
+            method: 'GET',
+        });
 
         if (response && Array.isArray(response.data)) {
             const designArticleList = response.data.map((article: any) => {

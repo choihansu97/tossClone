@@ -3,10 +3,10 @@ import AbstractView from "./core/abstractView";
 import {ArticleDto, EditorDto} from "../../dto/articleDto";
 
 export default class ArticleView extends AbstractView {
-    id: string | number;
+    id: string | number | null;
     category: string;
 
-    constructor(id: string | number, category: string) {
+    constructor(id: string | number | null, category: string) {
         super();
         this.id = id;
         this.category = category;
@@ -16,9 +16,9 @@ export default class ArticleView extends AbstractView {
         window.scrollTo({top: 0, left: 0, behavior: "smooth"});
         const client = new HttpClient();
 
-        const response: { data: any; error: any } = await client.get({
-            path: `/api/${this.category}/articles/:id`,
-            requestParams: this.id
+        const response = await client.request({
+            path: `/api/${this.category}/article/${this.id}`,
+            method: 'GET',
         });
 
         if (response && response.data) {

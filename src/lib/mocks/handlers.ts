@@ -10,7 +10,7 @@ export const handlers = [
         return res(ctx.status(200), ctx.json(designArticles));
     }),
 
-    rest.get("/api/tech/articles/:id", (req, res, ctx) => {
+    rest.get("/api/tech/article/:id", (req, res, ctx) => {
         const { id } = req.params;
         const filteredArticleParams = techArticles.find((article) => article.id == id);
 
@@ -19,7 +19,7 @@ export const handlers = [
         }
     }),
 
-    rest.get("/api/design/articles/:id", (req, res, ctx) => {
+    rest.get("/api/design/article/:id", (req, res, ctx) => {
         const { id } = req.params;
         const filteredArticleParams = designArticles.find((article) => article.id == id);
 
