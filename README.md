@@ -71,7 +71,7 @@ npm run start
     │   ├── images
     │   ├── styles
     ├── util
-    │   └── http.js
+    │   └── http.ts
     └── index.ts
 ```
 

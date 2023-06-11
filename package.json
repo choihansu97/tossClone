@@ -27,6 +27,7 @@
   "homepage": "https://github.com/choihansu97/tossClone#readme",
   "dependencies": {
     "@types/file-loader": "^5.0.1",
+    "axios": "^1.4.0",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
